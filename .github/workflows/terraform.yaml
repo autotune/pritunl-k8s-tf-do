@@ -7,7 +7,7 @@ on:
 
 jobs:
   tf_fmt:
-    name: Deploy Site
+    name: Deploy 
     runs-on: ubuntu-latest
     steps:
 
@@ -32,3 +32,4 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        args: '-var="do_token={{ secret.DO_OKEN }}"'
