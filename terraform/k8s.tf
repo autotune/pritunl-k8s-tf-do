@@ -7,7 +7,7 @@ resource "digitalocean_kubernetes_cluster" "k8s" {
   count   = var.enable_digitalocean ? 1 : 0
   name    = "${var.do_k8s_name}-${random_id.cluster_name[count.index].hex}"
   region  = var.do_region
-  version = 1.20.2-do.0 
+  version = "1.20.2-do.0" 
 
   node_pool {
     name       = var.do_k8s_pool_name
