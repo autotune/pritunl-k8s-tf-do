@@ -1,9 +1,11 @@
 data "digitalocean_domain" "default" {
-  name = var.domain_name
+  for_each = toset(var.domain_name)
+  name = each.value
 }
 
 resource "digitalocean_record" "a_records" {
-  domain = var.domain_name 
+  for_each = toset(var.domain_name)
+  domain = each.value 
   type   = "A"
   ttl = 60
   name   = "@"
