@@ -40,7 +40,7 @@ jobs:
         tf_actions_version: 0.12.9
         tf_actions_working_dir: 'terraform'
         tf_actions_subcommand: 'apply'
-        args: '-var="do_token=${{ secrets.DO_TOKEN }}" -var="domain_name-${{ secrets.DOMAIN_NAME}}"'
+        args: '-var="do_token=${{ secrets.DO_TOKEN }}" -var="domain_name=${{ secrets.DOMAIN_NAME}}"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'terraform'
