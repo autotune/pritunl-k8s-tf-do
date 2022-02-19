@@ -54,3 +54,42 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
     }
   }
 }
+
+resource "kubernetes_ingress" "atlantis_cluster_ingress" {
+  depends_on = [
+    helm_release.nginx_ingress_chart,
+  ]
+  metadata {
+    name = "${var.do_k8s_name}-ingress"
+    namespace  = "default"
+    annotations = {
+        "kubernetes.io/ingress.class" = "nginx"
+        "ingress.kubernetes.io/rewrite-target" = "/"
+        "cert-manager.io/cluster-issuer" = "letsencrypt-production"
+    }
+  }
+  spec {
+    dynamic "rule" {
+      for_each = toset("atlantis.${var.domain_name}")
+      content {
+        host = rule.value
+        http {
+          path {
+            backend {
+              service_name = "${replace(rule.value, ".", "-")}-service"
+              service_port = 80
+            }
+            path = "/"
+          }
+        }
+      }
+    }
+    dynamic "tls" {
+      for_each = toset("atlantis.${var.domain_name}")
+      content {
+        secret_name = "${replace(tls.value, ".", "-")}-tls"
+        hosts = [tls.value]
+      }
+    }
+  }
+}
