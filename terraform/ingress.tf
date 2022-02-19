@@ -21,7 +21,7 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
     helm_release.nginx_ingress_chart,
   ]
   metadata {
-    name = "${var.cluster_name}-ingress"
+    name = "${local.name}-ingress"
     namespace  = "default"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
