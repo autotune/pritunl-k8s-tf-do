@@ -35,14 +35,16 @@ resource "local_file" "kubeconfigdo" {
   filename = "${path.module}/kubeconfig_do"
 }
 
+/ * 
 data "digitalocean_kubernetes_cluster" "k8s" {
   name = local.name 
-}
+} 
+*/ 
 
 provider "kubernetes" {
-  host             = data.digitalocean_kubernetes_cluster.k8s.endpoint
-  token            = data.digitalocean_kubernetes_cluster.k8s.kube_config[0].token
+  host             = resource.digitalocean_kubernetes_cluster.k8s.endpoint
+  token            = resource.digitalocean_kubernetes_cluster.k8s.kube_config[0].token
   cluster_ca_certificate = base64decode(
-    data.digitalocean_kubernetes_cluster.k8s.kube_config[0].cluster_ca_certificate
+    resource.digitalocean_kubernetes_cluster.k8s.kube_config[0].cluster_ca_certificate
   )
 }
