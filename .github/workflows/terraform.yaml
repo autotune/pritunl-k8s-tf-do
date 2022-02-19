@@ -15,7 +15,10 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Terraform Init
-      uses: hashicorp/terraform-github-actions/init@v0.4.0
+      uses: hashicorp/terraform-github-actions/init@master
+      with:
+        tf_actions_version: 1.0.0
+        tf_actions_subcommand: 'init'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'terraform'
@@ -25,10 +28,13 @@ jobs:
         args: '-var="do_token=${{ secrets.DO_TOKEN }}"'
 
     - name: Terraform Validate
-      uses: hashicorp/terraform-github-actions/validate@v0.3.7
+      uses: hashicorp/terraform-github-actions/validate@master
 
     - name: Terraform Apply
-      uses: hashicorp/terraform-github-actions/apply@v0.4.0
+      uses: hashicorp/terraform-github-actions/apply@master
+      with:
+        tf_actions_version: 1.0.0
+        tf_actions_subcommand: 'apply'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'terraform'
