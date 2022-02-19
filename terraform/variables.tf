@@ -89,7 +89,7 @@ variable "atlantis_container" {
 }
 
 variable "atlantis_repo_whitelist" {
-  type    = list
+  type    = string 
   default = "github.com/autotune/pritunl-k8s-tf-do"
 }
 
