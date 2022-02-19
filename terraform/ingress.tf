@@ -21,7 +21,7 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
     helm_release.nginx_ingress_chart,
   ]
   metadata {
-    name = "${local.name}-ingress"
+    name = "${var.cluster_name}-ingress"
     namespace  = "default"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
@@ -31,12 +31,13 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
   }
   spec {
     dynamic "rule" {
+      for_each = toset(var.domain_name)
       content {
         host = rule.value
         http {
           path {
             backend {
-              service_name = "${var.domain_name}-service"
+              service_name = "${replace(rule.value, ".", "-")}-service"
               service_port = 80
             }
             path = "/"
@@ -45,8 +46,9 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
       }
     }
     dynamic "tls" {
+      for_each = toset(var.domain_name)
       content {
-        secret_name = "${var.domain_name}-tls"
+        secret_name = "${replace(tls.value, ".", "-")}-tls"
         hosts = [tls.value]
       }
     }
