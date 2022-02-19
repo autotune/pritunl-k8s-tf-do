@@ -76,12 +76,68 @@ resource "kubernetes_deployment" "atlantis_deployments" {
         }
       }
       spec {
+        volume {
+          name = "tls"
+
+          secret {
+            secret_name = "tls"
+          }
+        }
+
         container {
-          image = "nginxdemos/hello"
-          name  = "nginx-hello"
+          image = var.atlantis_container
+          name  = "atlantis"
+          args  = "server"
+
           port {
             container_port = 80
           }
+
+          env {
+            name  = "ATLANTIS_LOG_LEVEL"
+            value = "debug"
+          }
+
+          env {
+            name  = "ATLANTIS_PORT"
+            value = "4141"
+          }
+
+          env {
+            name  = "ATLANTIS_ATLANTIS_URL"
+            value = "https://atlantis.${each.value}"
+          }
+
+          env {
+            name  = "ATLANTIS_GH_USER"
+            value = var.atlantis_github_user
+          }
+
+          env {
+            name  = "ATLANTIS_GH_TOKEN"
+            value = var.atlantis_github_user_token
+          }
+
+          env {
+            name  = "ATLANTIS_GH_WEBHOOK_SECRET"
+            value = random_id.webhook.hex
+          }
+
+           env {
+            name  = "ATLANTIS_REPO_WHITELIST"
+            value = var.atlantis_repo_whitelist
+          }
+
+           env {
+            name  = "ATLANTIS_SSL_CERT_FILE"
+            value = "/etc/atlantis/tls/tls.crt"
+          }
+
+          env {
+            name  = "ATLANTIS_SSL_KEY_FILE"
+            value = "/etc/atlantis/tls/tls.key"
+          }
+ 
           resources {
             limits = {
               memory = "512M"

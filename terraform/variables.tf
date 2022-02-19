@@ -80,3 +80,18 @@ variable "atlantis_github_user_token" {
 variable "letsencrypt_email" {
   description = "le email"
 }
+
+variable "atlantis_container" {
+  type        = string
+  default     = "runatlantis/atlantis:latest"
+
+  description = "Name of the Atlantis container image to deploy. This can be specified like
+                \"container:version\" or as a full container URL."
+}
+
+variable "atlantis_repo_whitelist" {
+  type    = list
+  default = ["github.com/autotune/pritunl-k8s-tf-do"]
+}
+
+
