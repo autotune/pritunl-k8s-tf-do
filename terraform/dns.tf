@@ -17,10 +17,10 @@ resource "digitalocean_record" "a_records" {
 
 resource "digitalocean_record" "atlantis" {
   for_each = toset(var.domain_name)
-  domain = "atlantis.${each.value}"
+  domain = each.value
   type   = "A"
   ttl = 60
-  name   = "@"
+  name   = "atlantis"
   value  = digitalocean_loadbalancer.ingress_load_balancer.ip
   depends_on = [
     kubernetes_ingress.default_cluster_ingress
