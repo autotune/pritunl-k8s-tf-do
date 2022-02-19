@@ -19,6 +19,7 @@ jobs:
       with:
         tf_actions_version: 1.0.0
         tf_actions_subcommand: 'init'
+        tf_actions_working_dir: 'terraform'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'terraform'
