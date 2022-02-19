@@ -85,7 +85,8 @@ resource "tls_locally_signed_cert" "cert" {
 
 resource "kubernetes_secret" "tls" {
   metadata {
-    name = "tls"
+    name      = "tls"
+    namespace = "atlantis"
   }
 
   data = {
