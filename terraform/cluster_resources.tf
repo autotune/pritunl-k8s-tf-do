@@ -60,7 +60,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
   for_each = toset(var.domain_name)
   metadata {
     name = "${replace(each.value, ".", "-")}-atlantis-deployment"
-    namespace="default"
+    namespace="atlantis"
   }
   spec {
     replicas = 2
@@ -102,7 +102,7 @@ resource "kubernetes_service" "atlantis" {
   for_each = toset(var.domain_name)
   metadata {
     name      = "${replace(each.value, ".", "-")}-atlantis-service"
-    namespace = "default"
+    namespace = "atlantis"
   }
   spec {
     selector = {
