@@ -19,7 +19,7 @@ variable "do_token" {
 variable "do_region" {
   description = "Digital Ocean region (e.g. `fra1` => Frankfurt)"
   type        = string
-  default     = "fra1"
+  default     = "nyc1"
 }
 
 variable "do_k8s_name" {
