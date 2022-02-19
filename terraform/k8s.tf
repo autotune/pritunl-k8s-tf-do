@@ -37,7 +37,7 @@ resource "local_file" "kubeconfigdo" {
 
 data "digitalocean_kubernetes_cluster" "k8s" {
   count   = var.enable_digitalocean ? 1 : 0
-  name = "${var.do_k8s_name}-${random_id.cluster_name[count.index].hex}" 
+  name = local.name 
 }
 
 provider "kubernetes" {
