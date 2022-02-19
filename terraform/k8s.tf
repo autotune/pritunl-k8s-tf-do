@@ -1,3 +1,8 @@
+locals {
+  enable_do = var.enable_digitalocean ? 1 : 0 
+  name      = "${var.do_k8s_name}-${random_id.cluster_name[local.enable_do].hex}"
+}
+
 resource "random_id" "cluster_name" {
   count       = var.enable_digitalocean ? 1 : 0
   byte_length = 6
@@ -5,7 +10,7 @@ resource "random_id" "cluster_name" {
 
 resource "digitalocean_kubernetes_cluster" "k8s" {
   count   = var.enable_digitalocean ? 1 : 0
-  name    = "${var.do_k8s_name}-${random_id.cluster_name[count.index].hex}"
+  name    = local.name 
   region  = var.do_region
   version = "1.21.9-do.0" 
 
@@ -33,7 +38,7 @@ resource "local_file" "kubeconfigdo" {
 
 data "digitalocean_kubernetes_cluster" "k8s" {
   count   = var.enable_digitalocean ? 1 : 0
-  name = digitalocean_kubernetes_cluster.k8s[count.index].id 
+  name = "${var.do_k8s_name}-${random_id.cluster_name[count.index].hex}" 
 }
 
 provider "kubernetes" {
