@@ -38,9 +38,20 @@ data "digitalocean_kubernetes_cluster" "k8s" {
 */ 
 
 provider "kubernetes" {
-  host             = digitalocean_kubernetes_cluster.k8s[0].endpoint
-  token            = digitalocean_kubernetes_cluster.k8s[0].kube_config[0].token
+  host                   = digitalocean_kubernetes_cluster.k8s[0].endpoint
+  token                  = digitalocean_kubernetes_cluster.k8s[0].kube_config[0].token
   cluster_ca_certificate = base64decode(
     digitalocean_kubernetes_cluster.k8s[0].kube_config[0].cluster_ca_certificate
   )
+}
+
+provider "helm" {
+  kubernetes {
+    host                  = digitalocean_kubernetes_cluster.k8s[0].endpoint
+    token                 = digitalocean_kubernetes_cluster.k8s[0].kube_config[0].token 
+
+    client_ca_certificate = base64decode(
+    digitalocean_kubernetes_cluster.k8s[0].kube_config[0].cluster_ca_certificate
+  )
+  }
 }
