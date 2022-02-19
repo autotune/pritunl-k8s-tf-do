@@ -70,7 +70,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   }
   spec {
     dynamic "rule" {
-      for_each = toset("atlantis.${var.domain_name}")
+      for_each = toset(var.domain_name)
       content {
         host = rule.value
         http {
@@ -85,10 +85,10 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
       }
     }
     dynamic "tls" {
-      for_each = toset("atlantis.${var.domain_name}")
+      for_each = toset(var.domain_name)
       content {
-        secret_name = "${replace(tls.value, ".", "-")}-tls"
-        hosts = [tls.value]
+        secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
+        hosts = ["atlantis.${tls.value}"]
       }
     }
   }
