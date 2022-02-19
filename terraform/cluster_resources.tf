@@ -172,7 +172,7 @@ resource "kubernetes_service" "atlantis" {
       app = "${replace(each.value, ".", "-")}-atlantis-deployment"
     }
     port {
-      port = 4141
+      port = 80 
     }
   }
 }
