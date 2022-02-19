@@ -64,3 +64,6 @@ variable "do_k8s_nodepool_size" {
   default     = 2
 }
 
+variable "domain_name" {
+  description = "domain to use for argo and atlantis"
+}
