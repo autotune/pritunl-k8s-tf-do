@@ -1,7 +1,3 @@
-locals {
-  name      = "${var.do_k8s_name}-${random_id.cluster_name[1]}"
-}
-
 resource "random_id" "cluster_name" {
   count       = var.enable_digitalocean ? 1 : 0
   byte_length = 6
