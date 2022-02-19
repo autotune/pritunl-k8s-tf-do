@@ -40,7 +40,7 @@ jobs:
         tf_actions_version: 0.12.9
         tf_actions_working_dir: 'terraform'
         tf_actions_subcommand: 'apply'
-        args: '-var="do_token=${{ secrets.DO_TOKEN }}" -var="atlantis_github_user=${{ secrets.ATLANTIS_GITHUB_USER }} -var="atlantis_github_user_token=${{ secrets.ATLANTIS_GITHUB_USER_TOKEN }} -var="letsencrypt_email"=${{ secrets.LETSENCRYPT_EMAIL }}'
+        args: '-var="do_token=${{ secrets.DO_TOKEN }}" -var="atlantis_github_user=${{ secrets.ATLANTIS_GITHUB_USER }} -var="atlantis_github_user_token=${{ secrets.ATLANTIS_GITHUB_USER_TOKEN }} -var="letsencrypt_email"=${{ secrets.LETSENCRYPT_EMAIL }} -var="github_token=${{ secrets.GITHUB_TOKEN }}"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'terraform'

@@ -90,11 +90,15 @@ variable "atlantis_container" {
 
 variable "atlantis_repo_whitelist" {
   type    = list
-  default = ["github.com/autotune/pritunl-k8s-tf-do"]
+  default = "github.com/autotune/pritunl-k8s-tf-do"
 }
 
 variable "github_repo" {
   type = string
   default = "autotune/pritunl-k8s-tf-do"
+}
+
+variable "github_token" {
+  type = string
 }
 
