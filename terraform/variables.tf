@@ -71,6 +71,7 @@ variable "domain_name" {
 
 variable "atlantis_github_user" {
   description = "atlantis github user"
+  default     = "autotune"
 }
 
 variable "atlantis_github_user_token" {
