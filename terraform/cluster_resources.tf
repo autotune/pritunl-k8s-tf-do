@@ -55,3 +55,19 @@ resource "kubernetes_service" "sample_services" {
     }
   }
 }
+
+resource "kubernetes_service" "atlantis" {
+  for_each = toset(var.domain_name)
+  metadata {
+    name      = "${replace(each.value, ".", "-")}-atlantis-service"
+    namespace = "default"
+  }
+  spec {
+    selector = {
+      app = "${replace(each.value, ".", "-")}-atlantis-deployment"
+    }
+    port {
+      port = 80
+    }
+  }
+}
