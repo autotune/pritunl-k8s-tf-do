@@ -32,7 +32,7 @@ resource "local_file" "kubeconfigdo" {
 }
 
 data "digitalocean_kubernetes_cluster" "k8s" {
-  name = digitalocean_kubernetes_cluster.k8s.id
+  name = digitalocean_kubernetes_cluster.k8s[count.index].id 
 }
 
 provider "kubernetes" {
