@@ -60,7 +60,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     helm_release.nginx_ingress_chart,
   ]
   metadata {
-    name = "${var.do_k8s_name}-ingress"
+    name = "${var.do_k8s_name}-atlantis-ingress"
     namespace  = "default"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
