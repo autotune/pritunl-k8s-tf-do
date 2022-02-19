@@ -85,7 +85,7 @@ variable "atlantis_container" {
   type        = string
   default     = "runatlantis/atlantis:latest"
 
-  description = "Name of the Atlantis container image to deploy. This can be specified like
+  description = "Name of the Atlantis container image to deploy. This can be specified like \n
                 \"container:version\" or as a full container URL."
 }
 
