@@ -67,3 +67,11 @@ variable "do_k8s_nodepool_size" {
 variable "domain_name" {
   description = "domain to use for argo and atlantis"
 }
+
+variable "atlantis_github_user" {
+  description = "atlantis github user"
+}
+
+variable "atlantis_github_user_token" {
+  description = "atlantis github user_token"
+}
