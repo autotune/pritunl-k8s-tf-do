@@ -90,7 +90,9 @@ resource "kubernetes_deployment" "atlantis_deployments" {
           args  = ["server"]
 
           port {
-            container_port = 80
+            name           = "atlantis"
+            container_port = 4141 
+            protocol       = "TCP"
           }
 
           env {
