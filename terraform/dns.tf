@@ -21,8 +21,8 @@ resource "digitalocean_record" "atlantis" {
   type   = "A"
   ttl = 60
   name   = "atlantis"
-  value  = digitalocean_loadbalancer.ingress_load_balancer.ip
+  value  = digitalocean_loadbalancer.atlantis_ingress_load_balancer.ip
   depends_on = [
-    kubernetes_ingress.default_cluster_ingress
+    kubernetes_ingress.atlantis_cluster_ingress
   ]
 }
