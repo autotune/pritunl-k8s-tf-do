@@ -1,5 +1,5 @@
 resource "digitalocean_loadbalancer" "ingress_load_balancer" {
-  name   = "${local.name}-lb"
+  name   = "${var.do_k8s_name}-lb"
   region = var.do_region
   size = "lb-small"
   algorithm = "round_robin"
