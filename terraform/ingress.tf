@@ -36,7 +36,7 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
         http {
           path {
             backend {
-              service_name = "${var.domain_name)}-service"
+              service_name = "${var.domain_name}-service"
               service_port = 80
             }
             path = "/"
