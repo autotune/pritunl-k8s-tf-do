@@ -66,7 +66,7 @@ variable "do_k8s_nodepool_size" {
 
 variable "domain_name" {
   description = "domain to use for argo and atlantis"
-  default     = ["wayofthesys.com", "atlantis.waysofthesys.com]
+  default     = ["wayofthesys.com"]
 }
 
 variable "atlantis_github_user" {
