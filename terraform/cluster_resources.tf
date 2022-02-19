@@ -148,6 +148,11 @@ resource "kubernetes_deployment" "atlantis_deployments" {
               cpu = "50m"
             }
           }
+          volume_mount {
+            name       = "tls"
+            mount_path = "/etc/atlantis/tls"
+            read_only  = true
+          }
         }
       }
     }
