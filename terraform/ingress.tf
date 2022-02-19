@@ -16,6 +16,24 @@ resource "helm_release" "nginx_ingress_chart" {
   ]
 }
 
+resource "helm_release" "atlantis_nginx_ingress_chart" {
+  name       = "atlantis-nginx-ingress-controller"
+  namespace  = "default"
+  repository = "https://charts.bitnami.com/bitnami"
+  chart      = "nginx-ingress-controller"
+  set {
+    name  = "service.type"
+    value = "LoadBalancer"
+  }
+  set {
+    name  = "service.annotations.kubernetes\\.digitalocean\\.com/load-balancer-id"
+    value = digitalocean_loadbalancer.atlantis_ingress_load_balancer.id
+  }
+  depends_on = [
+    digitalocean_loadbalancer.atlantis_ingress_load_balancer,
+  ]
+}
+
 resource "kubernetes_ingress" "default_cluster_ingress" {
   depends_on = [
     helm_release.nginx_ingress_chart,
@@ -57,7 +75,7 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
 
 resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   depends_on = [
-    helm_release.nginx_ingress_chart,
+    helm_release.atlantis_nginx_ingress_chart,
   ]
   metadata {
     name = "${var.do_k8s_name}-atlantis-ingress"
