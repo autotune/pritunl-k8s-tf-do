@@ -1,6 +1,5 @@
 locals {
-  enable_do = var.enable_digitalocean ? 1 : 0 
-  name      = "${var.do_k8s_name}-${random_id.cluster_name[local.enable_do].hex}"
+  name      = "${var.do_k8s_name}-${random_id.cluster_name}"
 }
 
 resource "random_id" "cluster_name" {
