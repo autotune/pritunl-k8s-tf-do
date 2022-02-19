@@ -85,8 +85,7 @@ variable "atlantis_container" {
   type        = string
   default     = "runatlantis/atlantis:latest"
 
-  description = "Name of the Atlantis container image to deploy. This can be specified like \n
-                \"container:version\" or as a full container URL."
+  description = "Name of the Atlantis container image to deploy."
 }
 
 variable "atlantis_repo_whitelist" {
