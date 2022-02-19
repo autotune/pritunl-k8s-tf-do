@@ -38,10 +38,9 @@ data "digitalocean_kubernetes_cluster" "k8s" {
 */ 
 
 provider "kubernetes" {
-  count            = var.enable_digitalocean ? 1 : 0
-  host             = digitalocean_kubernetes_cluster.k8s[count.index].endpoint
-  token            = digitalocean_kubernetes_cluster.k8s[count.index].kube_config[0].token
+  host             = digitalocean_kubernetes_cluster.k8s[0].endpoint
+  token            = digitalocean_kubernetes_cluster.k8s[0].kube_config[0].token
   cluster_ca_certificate = base64decode(
-    digitalocean_kubernetes_cluster.k8s[count.index].kube_config[0].cluster_ca_certificate
+    digitalocean_kubernetes_cluster.k8s[0].kube_config[0].cluster_ca_certificate
   )
 }
