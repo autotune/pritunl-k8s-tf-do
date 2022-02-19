@@ -35,7 +35,7 @@ resource "local_file" "kubeconfigdo" {
   filename = "${path.module}/kubeconfig_do"
 }
 
-/ * 
+/* 
 data "digitalocean_kubernetes_cluster" "k8s" {
   name = local.name 
 } 
