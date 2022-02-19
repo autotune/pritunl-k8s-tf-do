@@ -76,3 +76,7 @@ variable "atlantis_github_user" {
 variable "atlantis_github_user_token" {
   description = "atlantis github user_token"
 }
+
+variable "letsencrypt_email" {
+  description = "le email"
+}
