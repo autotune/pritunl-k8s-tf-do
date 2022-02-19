@@ -26,7 +26,6 @@ jobs:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
-        args: '-var="do_token=${{ secrets.DO_TOKEN }}"'
 
     - name: Terraform Validate
       uses: hashicorp/terraform-github-actions@master
@@ -41,7 +40,7 @@ jobs:
         tf_actions_version: 0.12.9
         tf_actions_working_dir: 'terraform'
         tf_actions_subcommand: 'apply'
-        args: '-var="do_token=${{ secrets.DO_TOKEN }}"'
+        args: '-var="do_token=${{ secrets.DO_TOKEN }}" -var="domain_name-${{ secrets.DOMAIN_NAME}}"'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'terraform'
