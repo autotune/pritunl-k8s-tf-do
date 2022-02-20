@@ -4,10 +4,11 @@ resource "random_id" "cluster_name" {
 }
 
 resource "digitalocean_kubernetes_cluster" "k8s" {
-  count   = var.enable_digitalocean ? 1 : 0
-  name    = local.name 
-  region  = var.do_region
-  version = "1.21.9-do.0" 
+  depends_on = digitalocean_vpc.k8s
+  count      = var.enable_digitalocean ? 1 : 0
+  name       = local.name 
+  region     = var.do_region
+  version    = "1.21.9-do.0" 
 
   node_pool {
     name       = var.do_k8s_pool_name
