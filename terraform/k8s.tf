@@ -54,6 +54,6 @@ provider "helm" {
 
     cluster_ca_certificate = base64decode(
     digitalocean_kubernetes_cluster.k8s[0].kube_config[0].cluster_ca_certificate
-  )
+    )
   }
 }

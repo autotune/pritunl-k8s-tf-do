@@ -14,6 +14,9 @@ resource "helm_release" "nginx_ingress_chart" {
   depends_on = [
     digitalocean_loadbalancer.ingress_load_balancer,
   ]
+  timeouts {
+    create = "60m"
+  }
 }
 
 resource "kubernetes_ingress" "atlantis_cluster_ingress" {
