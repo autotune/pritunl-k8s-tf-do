@@ -79,7 +79,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
           path {
             backend {
               service_name = "${replace(rule.value, ".", "-")}-atlantis-service"
-              service_port = 443
+              service_port = 80 
             }
             path = "/"
           }
