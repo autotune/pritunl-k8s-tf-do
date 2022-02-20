@@ -19,7 +19,7 @@ variable "do_token" {
 variable "do_region" {
   description = "Digital Ocean region (e.g. `fra1` => Frankfurt)"
   type        = string
-  default     = "nyc1"
+  default     = "nyc3"
 }
 
 variable "do_k8s_name" {
@@ -71,7 +71,6 @@ variable "domain_name" {
 
 variable "atlantis_github_user" {
   description = "atlantis github user"
-  default     = "autotune"
 }
 
 variable "atlantis_github_user_token" {
