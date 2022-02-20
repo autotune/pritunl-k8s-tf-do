@@ -6,7 +6,7 @@ resource "helm_release" "cert-manager" {
   namespace        = "kube-system"
   timeout          = 120
   depends_on = [
-    kubernetes_ingress.default_cluster_ingress,
+    kubernetes_ingress.atlantis_cluster_ingress,
   ]
   set {
     name  = "createCustomResource"
