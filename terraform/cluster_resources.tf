@@ -85,9 +85,10 @@ resource "kubernetes_deployment" "atlantis_deployments" {
         }
 
         container {
-          image = var.atlantis_container
-          name  = "atlantis"
-          args  = ["server"]
+          image   = var.atlantis_container
+          name    = "atlantis"
+          # args  = ["server"]
+          command = ["atlantis", "server"] 
 
           port {
             name           = "atlantis"
