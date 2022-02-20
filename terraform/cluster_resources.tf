@@ -130,6 +130,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
             value = var.atlantis_repo_whitelist
           }
 
+           /*
            env {
             name  = "ATLANTIS_SSL_CERT_FILE"
             value = "/etc/atlantis/tls/tls.crt"
@@ -139,6 +140,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
             name  = "ATLANTIS_SSL_KEY_FILE"
             value = "/etc/atlantis/tls/tls.key"
           }
+          */
  
           resources {
             limits = {
@@ -172,7 +174,7 @@ resource "kubernetes_service" "atlantis" {
       app = "${replace(each.value, ".", "-")}-atlantis-deployment"
     }
     port {
-      port = 443 
+      port = 80 
     }
   }
 }
