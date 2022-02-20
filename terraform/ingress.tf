@@ -12,16 +12,13 @@ resource "helm_release" "nginx_ingress_chart" {
     value = digitalocean_loadbalancer.ingress_load_balancer.id
   }
   depends_on = [
-    digitalocean_loadbalancer.ingress_load_balancer,
+    digitalocean_loadbalancer.ingress_load_balancer
   ]
-  timeouts {
-    create = "60m"
-  }
 }
 
 resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   depends_on = [
-    helm_release.nginx_ingress_chart,
+    helm_release.nginx_ingress_chart
   ]
   metadata {
     name = "${var.do_k8s_name}-atlantis-ingress"
