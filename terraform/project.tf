@@ -4,6 +4,6 @@ resource "digitalocean_project" "atlantis" {
   environment = "Production"
 
   resources = [
-    digitalocean_kubernetes_cluster.k8s[0].id
+    digitalocean_kubernetes_cluster.k8s[1].urn
   ]
 }
