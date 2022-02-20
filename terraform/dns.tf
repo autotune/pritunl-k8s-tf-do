@@ -11,7 +11,7 @@ resource "digitalocean_record" "a_records" {
   name   = "@"
   value  = digitalocean_loadbalancer.ingress_load_balancer.ip
   depends_on = [
-    kubernetes_ingress.default_cluster_ingress
+    kubernetes_ingress.atlantis_cluster_ingress
   ]
 }
 
