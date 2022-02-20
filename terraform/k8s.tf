@@ -14,6 +14,7 @@ resource "digitalocean_kubernetes_cluster" "k8s" {
     size       = var.do_k8s_node_type
     node_count = var.do_k8s_nodes
   }
+   vpc_uuid = digitalocean_vpc.k8s.id
 }
 
 resource "digitalocean_kubernetes_node_pool" "k8s_nodes" {
