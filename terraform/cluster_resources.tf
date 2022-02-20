@@ -76,18 +76,9 @@ resource "kubernetes_deployment" "atlantis_deployments" {
         }
       }
       spec {
-        volume {
-          name = "tls"
-
-          secret {
-            secret_name = "tls"
-          }
-        }
-
         container {
           image   = var.atlantis_container
           name    = "atlantis"
-          # args  = ["server"]
           command = ["atlantis", "server"] 
 
           port {
@@ -131,18 +122,6 @@ resource "kubernetes_deployment" "atlantis_deployments" {
             value = var.atlantis_repo_whitelist
           }
 
-           /*
-           env {
-            name  = "ATLANTIS_SSL_CERT_FILE"
-            value = "/etc/atlantis/tls/tls.crt"
-          }
-
-          env {
-            name  = "ATLANTIS_SSL_KEY_FILE"
-            value = "/etc/atlantis/tls/tls.key"
-          }
-          */
- 
           resources {
             limits = {
               memory = "512M"
@@ -152,11 +131,6 @@ resource "kubernetes_deployment" "atlantis_deployments" {
               memory = "256M"
               cpu = "50m"
             }
-          }
-          volume_mount {
-            name       = "tls"
-            mount_path = "/etc/atlantis/tls"
-            read_only  = true
           }
         }
       }
