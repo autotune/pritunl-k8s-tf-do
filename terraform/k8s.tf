@@ -4,7 +4,7 @@ resource "random_id" "cluster_name" {
 }
 
 resource "digitalocean_kubernetes_cluster" "k8s" {
-  depends_on = digitalocean_vpc.k8s
+  depends_on = [digitalocean_vpc.k8s]
   count      = var.enable_digitalocean ? 1 : 0
   name       = local.name 
   region     = var.do_region
