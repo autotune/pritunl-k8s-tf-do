@@ -1,4 +1,7 @@
 resource "kubernetes_deployment" "sample_deployments" {
+
+  depends_on = [digitalocean_kubernetes_cluster.k8s] 
+
   for_each = toset(var.domain_name)
   metadata {
     name = "${replace(each.value, ".", "-")}-deployment"
@@ -41,6 +44,9 @@ resource "kubernetes_deployment" "sample_deployments" {
 }
 
 resource "kubernetes_service" "sample_services" {
+
+  depends_on = [digitalocean_kubernetes_cluster.k8s]
+
   for_each = toset(var.domain_name)
   metadata {
     name      = "${replace(each.value, ".", "-")}-service"
@@ -57,6 +63,9 @@ resource "kubernetes_service" "sample_services" {
 }
 
 resource "kubernetes_deployment" "atlantis_deployments" {
+
+  depends_on = [digitalocean_kubernetes_cluster.k8s]
+
   for_each = toset(var.domain_name)
   metadata {
     name = "${replace(each.value, ".", "-")}-atlantis-deployment"
@@ -139,6 +148,9 @@ resource "kubernetes_deployment" "atlantis_deployments" {
 }
 
 resource "kubernetes_service" "atlantis" {
+
+  depends_on = [digitalocean_kubernetes_cluster.k8s]
+
   for_each = toset(var.domain_name)
   metadata {
     name      = "${replace(each.value, ".", "-")}-atlantis-service"
