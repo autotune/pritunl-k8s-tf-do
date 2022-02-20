@@ -16,6 +16,7 @@ resource "helm_release" "nginx_ingress_chart" {
   ]
 }
 
+/*
 resource "kubernetes_ingress" "default_cluster_ingress" {
   depends_on = [
     helm_release.nginx_ingress_chart,
@@ -54,6 +55,7 @@ resource "kubernetes_ingress" "default_cluster_ingress" {
     }
   }
 }
+*/
 
 resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   depends_on = [
@@ -72,7 +74,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "atlantis.${rule.value}"
+        host = rule.value
         http {
           path {
             backend {
