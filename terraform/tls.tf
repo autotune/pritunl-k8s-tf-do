@@ -4,12 +4,10 @@ resource "kubernetes_secret" "tls" {
     namespace = "atlantis"
   }
 
-  /* 
   data = {
     "tls.crt" = tls_locally_signed_cert.cert.cert_pem
     "tls.key" = tls_private_key.key.private_key_pem
   }
-  */
 }
 
 resource "random_id" "encryption-key" {
@@ -62,6 +60,7 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
+    "atlantis.wayofthesys.com",
   ]
 
   ip_addresses = [
