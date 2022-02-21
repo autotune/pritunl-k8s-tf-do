@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "tls" {
   metadata {
-    name      = "${var.domain_name[0]}-atlantis-tls"
+    name      = "${replace(var.domain_name[0], ".", "-")}-atlantis-tls"
     namespace = "atlantis"
   }
 
