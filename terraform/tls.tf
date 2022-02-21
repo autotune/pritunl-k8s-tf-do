@@ -16,13 +16,11 @@ resource "random_id" "encryption-key" {
 }
 
 resource "tls_private_key" "ca" {
-  for_each = toset(var.domain_name)
   algorithm = "RSA"
   rsa_bits  = "2048"
 }
 
 resource "tls_self_signed_cert" "ca" {
-  for_each = toset(var.domain_name)
   key_algorithm   = tls_private_key.ca.algorithm
   private_key_pem = tls_private_key.ca.private_key_pem
 
@@ -55,7 +53,6 @@ resource "tls_private_key" "key" {
 }
 
 resource "tls_cert_request" "request" {
-  for_each = toset(var.domain_name)
   key_algorithm   = tls_private_key.key.algorithm
   private_key_pem = tls_private_key.key.private_key_pem
 
@@ -64,7 +61,7 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "${each.value}",
+    "${var.domain_names[0]}",
   ]
 
   ip_addresses = [
@@ -73,18 +70,17 @@ resource "tls_cert_request" "request" {
   ]
 
   subject {
-    common_name  = each.value 
+    common_name  = var.domain_name[0]
     organization = "Atlantis"
   }
 }
 
 resource "tls_locally_signed_cert" "cert" {
-  for_each = toset(var.domain_name)
   cert_request_pem = tls_cert_request.request[each.key].cert_request_pem
 
-  ca_key_algorithm   = tls_private_key.ca[var.domain_name[0]].algorithm
-  ca_private_key_pem = tls_private_key.ca[var.domain_name[0]].private_key_pem
-  ca_cert_pem        = tls_self_signed_cert.ca[var.domain_name[0]].cert_pem
+  ca_key_algorithm   = tls_private_key.ca.algorithm
+  ca_private_key_pem = tls_private_key.ca.private_key_pem
+  ca_cert_pem        = tls_self_signed_cert.ca.cert_pem
 
   validity_period_hours = 8760
 
@@ -97,6 +93,6 @@ resource "tls_locally_signed_cert" "cert" {
   ]
 
   provisioner "local-exec" {
-    command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca[each.key].cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
+    command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca.cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
   }
 }
