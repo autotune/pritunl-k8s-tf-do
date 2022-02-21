@@ -77,6 +77,7 @@ resource "tls_cert_request" "request" {
 }
 
 resource "tls_locally_signed_cert" "cert" {
+  for_each = toset(var.domain_name)
   cert_request_pem = tls_cert_request.request.cert_request_pem
 
   ca_key_algorithm   = tls_private_key.ca.algorithm
