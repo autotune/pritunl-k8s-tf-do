@@ -23,8 +23,8 @@ resource "tls_private_key" "ca" {
 
 resource "tls_self_signed_cert" "ca" {
   for_each = toset(var.domain_name)
-  key_algorithm   = tls_private_key.ca[each.key].algorithm
-  private_key_pem = tls_private_key.ca[each.key].private_key_pem
+  key_algorithm   = tls_private_key.ca[0].algorithm
+  private_key_pem = tls_private_key.ca[0].private_key_pem
 
   subject {
     common_name  = "ca.local"
@@ -73,7 +73,7 @@ resource "tls_cert_request" "request" {
   ]
 
   subject {
-    common_name  = "wayofthesys.com"
+    common_name  = each.value 
     organization = "Atlantis"
   }
 }
