@@ -69,7 +69,7 @@ resource "tls_cert_request" "request" {
   ]
 
   subject {
-    common_name  = "atlantis.local"
+    common_name  = "wayofthesys.com"
     organization = "Atlantis"
   }
 }
