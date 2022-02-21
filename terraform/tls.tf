@@ -1,13 +1,12 @@
 resource "kubernetes_secret" "tls" {
-  for_each = toset(var.domain_name)
   metadata {
-    name      = "${replace(each.value, ".", "-")}-atlantis-tls"
+    name      = "${var.domain_name[0]}-atlantis-tls"
     namespace = "atlantis"
   }
 
   data = {
-    "tls.crt" = tls_locally_signed_cert.cert[each.key].cert_pem
-    "tls.key" = tls_private_key.key[each.key].private_key_pem
+    "tls.crt" = tls_locally_signed_cert.cert.cert_pem
+    "tls.key" = tls_private_key.key.private_key_pem
   }
 }
 
