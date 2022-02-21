@@ -3,6 +3,7 @@ resource "random_id" "cluster_name" {
   byte_length = 6
 }
 
+/*
 resource "digitalocean_kubernetes_cluster" "k8s" {
   depends_on = [digitalocean_vpc.k8s]
   count      = var.enable_digitalocean ? 1 : 0
@@ -17,6 +18,7 @@ resource "digitalocean_kubernetes_cluster" "k8s" {
   }
   vpc_uuid   = digitalocean_vpc.k8s.id
 }
+*/
 
 resource "digitalocean_kubernetes_node_pool" "k8s_nodes" {
   count      = var.enable_digitalocean ? 1 : 0
