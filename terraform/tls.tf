@@ -96,6 +96,6 @@ resource "tls_locally_signed_cert" "cert" {
   ]
 
   provisioner "local-exec" {
-    command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca.cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
+    command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca[each.key].cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
   }
 }
