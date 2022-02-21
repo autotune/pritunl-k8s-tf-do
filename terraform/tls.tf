@@ -1,6 +1,7 @@
 resource "kubernetes_secret" "tls" {
   metadata {
-    name = "tls"
+    name      = "tls"
+    namespace = "atlantis"
   }
 
   data = {
