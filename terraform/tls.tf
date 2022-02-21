@@ -16,14 +16,15 @@ resource "random_id" "encryption-key" {
 }
 
 resource "tls_private_key" "ca" {
+  for_each = toset(var.domain_name)
   algorithm = "RSA"
   rsa_bits  = "2048"
 }
 
 resource "tls_self_signed_cert" "ca" {
   for_each = toset(var.domain_name)
-  key_algorithm   = tls_private_key.ca.algorithm
-  private_key_pem = tls_private_key.ca.private_key_pem
+  key_algorithm   = tls_private_key.ca[each.key].algorithm
+  private_key_pem = tls_private_key.ca[each.key].private_key_pem
 
   subject {
     common_name  = "ca.local"
