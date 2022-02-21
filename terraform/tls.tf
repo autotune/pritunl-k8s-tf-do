@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "tls" {
   metadata {
-    name      = "wayofthesys-com-atlantis-tls"
+    name      = "tls"
     namespace = "atlantis"
   }
 
