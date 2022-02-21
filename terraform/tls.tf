@@ -61,7 +61,7 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "${var.domain_names[0]}",
+    "${var.domain_name[0]}",
   ]
 
   ip_addresses = [
