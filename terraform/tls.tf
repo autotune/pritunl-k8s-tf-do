@@ -80,9 +80,9 @@ resource "tls_locally_signed_cert" "cert" {
   for_each = toset(var.domain_name)
   cert_request_pem = tls_cert_request.request[each.key].cert_request_pem
 
-  ca_key_algorithm   = tls_private_key.ca.algorithm
-  ca_private_key_pem = tls_private_key.ca.private_key_pem
-  ca_cert_pem        = tls_self_signed_cert.ca.cert_pem
+  ca_key_algorithm   = tls_private_key.ca[each.key].algorithm
+  ca_private_key_pem = tls_private_key.ca[each.key].private_key_pem
+  ca_cert_pem        = tls_self_signed_cert.ca[each.key].cert_pem
 
   validity_period_hours = 8760
 
