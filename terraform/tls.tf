@@ -60,6 +60,7 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
+    "atlantis.wayofthesys.com",
   ]
 
   ip_addresses = [
