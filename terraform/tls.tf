@@ -63,7 +63,7 @@ resource "tls_cert_request" "request" {
 
   ip_addresses = [
     "127.0.0.1",
-    google_compute_address.address.address,
+    digitalocean_loadbalancer.ingress_load_balancer.ip,
   ]
 
   subject {
