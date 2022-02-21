@@ -65,7 +65,6 @@ resource "tls_cert_request" "request" {
   ip_addresses = [
     "127.0.0.1",
     digitalocean_loadbalancer.ingress_load_balancer.ip,
-    "159.89.242.133",
   ]
 
   subject {
