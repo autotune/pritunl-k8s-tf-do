@@ -1,6 +1,7 @@
 resource "kubernetes_secret" "tls" {
+  for_each = toset(var.domain_name)
   metadata {
-    name      = "wayofthesys-com-atlantis-tls"
+    name      = "${replace(each.value, ".", "-")}-atlantis-tls"
     namespace = "atlantis"
   }
 
@@ -52,6 +53,7 @@ resource "tls_private_key" "key" {
 }
 
 resource "tls_cert_request" "request" {
+  for_each = toset(var.domain_name)
   key_algorithm   = tls_private_key.key.algorithm
   private_key_pem = tls_private_key.key.private_key_pem
 
@@ -60,7 +62,7 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "wayofthesys.com",
+    "${each.value}",
   ]
 
   ip_addresses = [
