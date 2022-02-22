@@ -31,7 +31,7 @@ resource "kubernetes_deployment" "oath_deployments" {
             container_port = 80
           }
 
-          env = [
+          env = { 
             {
               name       = "OAUTH2_PROXY_CLIENT_ID"
               value_from =  {
@@ -59,7 +59,7 @@ resource "kubernetes_deployment" "oath_deployments" {
                 }
               }
              }
-             ] 
+             }
 
           resources {
             limits = {
