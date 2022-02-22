@@ -5,7 +5,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
   for_each = toset(var.domain_name)
   metadata {
     name = "${replace(each.value, ".", "-")}-oauth2-deployment"
-    namespace="oath-proxy"
+    namespace="oauth-proxy"
   }
   spec {
     replicas = 2
