@@ -39,7 +39,7 @@ resource "kubernetes_deployment" "oath_deployments" {
                   key  = github-client-id
                  }
                }
-           },
+           }
           env {
                name       = "OAUTH2_PROXY_CLIENT_SECRET"
                value_from = {
@@ -48,7 +48,7 @@ resource "kubernetes_deployment" "oath_deployments" {
                    key  = github-client-secret
                  }
                }
-          },
+           }
           env {
               name       = "OAUTH2_PROXY_COOKIE_SECRET"
               value_from = {
@@ -57,7 +57,7 @@ resource "kubernetes_deployment" "oath_deployments" {
                   key  = cookie-secret
                 }
               }
-            }
+           }
 
           resources {
             limits = {
