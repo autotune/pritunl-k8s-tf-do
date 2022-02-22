@@ -17,15 +17,15 @@ resource "kubernetes_secret" "eab_hmac" {
 }
 
 resource "kubernetes_secret" "oath_proxy_secret" {
-  depends_on = [kubernetes_namespace.oath_proxy]
+  depends_on = [kubernetes_namespace.oauth_proxy]
   metadata {
     name      = "oauth-proxy-secret"
     namespace = "oauth-proxy"
   }
 
   data = {
-      github-client-id = base64encode(var.oath_client_id)
-      github-client-secret: base64encode(var.oath_client_secret)
+      github-client-id = base64encode(var.oauth_client_id)
+      github-client-secret: base64encode(var.oauth_client_secret)
       cookie-secret: base64encode(random_string.random.result)
   }
 
