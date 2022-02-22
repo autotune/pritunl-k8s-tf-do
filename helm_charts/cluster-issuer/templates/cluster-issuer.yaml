@@ -43,7 +43,7 @@ spec:
         key: secret
       keyAlgorithm: HS256
     privateKeySecretRef:
-        name: sslcom-private-hmac-key 
+        name: prod 
     solvers:
     - http01:
         ingress:
