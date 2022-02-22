@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "do_token" {
   metadata {
-    name = "do_token"
+    name = "do-token"
   }
 
   data = {
