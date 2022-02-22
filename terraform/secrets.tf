@@ -19,8 +19,8 @@ resource "kubernetes_secret" "eab_hmac" {
 resource "kubernetes_secret" "oath_proxy_secret" {
   depends_on = [kubernetes_namespace.oath_proxy]
   metadata {
-    name      = "oath-proxy-secret"
-    namespace = "oath-proxy"
+    name      = "oauth-proxy-secret"
+    namespace = "oauth-proxy"
   }
 
   data = {
