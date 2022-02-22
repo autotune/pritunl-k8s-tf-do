@@ -3,3 +3,9 @@ resource "kubernetes_namespace" "atlantis" {
     name = "atlantis"
   }
 }
+
+resource "kubernetes_namespace" "oath-proxy" {
+  metadata {
+    name = "oath-proxy"
+  }
+}
