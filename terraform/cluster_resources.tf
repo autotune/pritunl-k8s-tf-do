@@ -35,7 +35,7 @@ resource "kubernetes_deployment" "oath_deployments" {
             {
               name       = "OAUTH2_PROXY_CLIENT_ID"
               value_from =  {
-                secret_key_ref {
+                secret_key_ref = {
                   name = oauth-proxy-secret
                   key  = github-client-id
                  }
@@ -43,8 +43,8 @@ resource "kubernetes_deployment" "oath_deployments" {
              },
              {
                name       = "OAUTH2_PROXY_CLIENT_SECRET"
-               value_from {
-                 secret_key_ref {
+               value_from = {
+                 secret_key_ref = {
                    name = oauth-proxy-secret
                    key  = github-client-secret
                  }
@@ -52,8 +52,8 @@ resource "kubernetes_deployment" "oath_deployments" {
              },
              {
               name       = "OAUTH2_PROXY_COOKIE_SECRET"
-              value_from {
-                secret_key_ref {
+              value_from = {
+                secret_key_ref = {
                   name = oauth-proxy-secret
                   key  = cookie-secret
                 }
