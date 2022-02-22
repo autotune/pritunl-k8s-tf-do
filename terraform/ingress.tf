@@ -26,7 +26,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
-        "cert-manager.io/cluster-issuer" = "letsencrypt-staging"
+        "cert-manager.io/cluster-issuer" = "letsencrypt-production"
     }
   }
   spec {
