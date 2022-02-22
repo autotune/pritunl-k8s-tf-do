@@ -30,11 +30,11 @@ resource "helm_release" "cluster-issuer" {
     value = "${var.letsencrypt_email}"
   }
   set {
-    name = sslcom_keyid
+    name = "sslcom_keyid"
     value = "${var.sslcom_keyid}"
   }
   set {
-    name  = sslcom_private_hmac_key
+    name  = "sslcom_private_hmac_key"
     value = "${var.sslcom_private_hmac_key}"
   }
 }
