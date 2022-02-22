@@ -17,7 +17,7 @@ jobs:
     - name: Terraform Init
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_version: 0.12.9
+        tf_actions_version: 0.13.0
         tf_actions_working_dir: 'terraform'
         tf_actions_subcommand: 'init'
       env:
@@ -30,14 +30,14 @@ jobs:
     - name: Terraform Validate
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_version: 0.12.9
+        tf_actions_version: 0.13.0
         tf_actions_working_dir: 'terraform'
         tf_actions_subcommand: 'validate'
 
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_version: 0.12.9
+        tf_actions_version: 0.13.0
         tf_actions_working_dir: 'terraform'
         tf_actions_subcommand: 'apply'
         args: '-var="sslcom_private_hmac_key=${{ secrets.SSLCOM_PRIVATE_KEYID }}" -var=sslcom_keyid=${{ secrets.SSLCOM_KEYID }} -var=sslcom_hmac_key=${{ secrets.SSLCOM_HMAC_KEY }}" -var="do_token=${{ secrets.DO_TOKEN }}" -var="atlantis_github_user=${{ secrets.ATLANTIS_GH_USER }} -var="atlantis_github_user_token=${{ secrets.ATLANTIS_GH_USER_TOKEN }} -var="letsencrypt_email"=${{ secrets.LETSENCRYPT_EMAIL }} -var="atlantis_github_user_token=${{ secrets.ATLANTIS_GH_TOKEN }}" -var="github_token=${{ secrets.ATLANTIS_GH_TOKEN }} -var="atlantis_github_user=${{ secrets.ATLANTIS_GH_USER }}"'
