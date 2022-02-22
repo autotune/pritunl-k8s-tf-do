@@ -36,11 +36,11 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${each.value}"
+        host = "${rule.value}"
         http {
           path {
             backend {
-              service_name = "${replace(each.value, ".", "-")}-atlantis-service"
+              service_name = "${replace(rule.value, ".", "-")}-atlantis-service"
               service_port = 80 
             }
             path = "/"
@@ -51,8 +51,8 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     dynamic "tls" {
       for_each = toset(var.domain_name)
       content {
-        secret_name = "${replace(each.value, ".", "-")}-atlantis-tls"
-        hosts = ["${each.value}"]
+        secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
+        hosts = ["${tls.value}"]
       }
     }
   }
