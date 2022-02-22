@@ -1,3 +1,82 @@
+resource "kubernetes_deployment" "oath_deployments" {
+
+  depends_on = [digitalocean_kubernetes_cluster.k8s] 
+
+  for_each = toset(var.domain_name)
+  metadata {
+    name = "${replace(each.value, ".", "-")}-oath2-deployment"
+    namespace="default"
+  }
+  spec {
+    replicas = 2
+    selector {
+      match_labels = {
+        app = "${replace(each.value, ".", "-")}-oath2-deployment"
+      }
+    }
+    template {
+      metadata {
+        labels = {
+          app  = "${replace(each.value, ".", "-")}-oath2-deployment"
+        }
+      }
+      spec {
+        container {
+          image = "bitnami/oauth2-proxy:latest"
+          name  = "oauth2-proxy"
+          args  = ["--provider=github," "--email-domain=*", "--upstream=file:///dev/null",
+                   "--http-address=0.0.0.0:4180", "--whitelist-domain=.${var.domain_name[0]}", 
+                   "--cookie-domain=.${var.domain_name[0]"]
+          port {
+            container_port = 80
+          }
+
+          env = [
+            {
+              name       = "OAUTH2_PROXY_CLIENT_ID"
+              value_from {
+                secret_key_ref {
+                  name = oauth-proxy-secret
+                  key  = github-client-id
+                 }
+               }
+             },
+             {
+               name       = "OAUTH2_PROXY_CLIENT_SECRET"
+               value_from {
+                 secret_key_ref {
+                   name = oauth-proxy-secret
+                   key  = github-client-secret
+                 }
+               }
+             },
+             {
+              name       = "OAUTH2_PROXY_COOKIE_SECRET"
+              value_from {
+                secret_key_ref {
+                  name = oauth-proxy-secret
+                  key  = cookie-secret
+                }
+              }
+             }
+             ] 
+
+          resources {
+            limits = {
+              memory = "512M"
+              cpu = "1"
+            }
+            requests = {
+              memory = "256M"
+              cpu = "50m"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 resource "kubernetes_deployment" "sample_deployments" {
 
   depends_on = [digitalocean_kubernetes_cluster.k8s] 
