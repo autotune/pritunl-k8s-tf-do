@@ -7,5 +7,5 @@ resource "kubernetes_secret" "do_token" {
     access-token = base64encode(var.do_token)
   }
 
-  type = "kubernetes.io/basic-auth"
+  type = "kubernetes.io/opaque"
 }
