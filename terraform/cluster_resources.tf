@@ -34,7 +34,7 @@ resource "kubernetes_deployment" "oath_deployments" {
           env = [
             {
               name       = "OAUTH2_PROXY_CLIENT_ID"
-              value_from {
+              value_from =  {
                 secret_key_ref {
                   name = oauth-proxy-secret
                   key  = github-client-id
