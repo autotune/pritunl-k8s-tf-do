@@ -31,7 +31,7 @@ resource "kubernetes_deployment" "oath_deployments" {
             container_port = 80
           }
 
-          env = { 
+          env { 
             {
               name       = "OAUTH2_PROXY_CLIENT_ID"
               value_from =  {
@@ -41,6 +41,7 @@ resource "kubernetes_deployment" "oath_deployments" {
                  }
                }
              },
+          env {
              {
                name       = "OAUTH2_PROXY_CLIENT_SECRET"
                value_from = {
@@ -50,6 +51,8 @@ resource "kubernetes_deployment" "oath_deployments" {
                  }
                }
              },
+          },
+          env {
              {
               name       = "OAUTH2_PROXY_COOKIE_SECRET"
               value_from = {
@@ -58,8 +61,8 @@ resource "kubernetes_deployment" "oath_deployments" {
                   key  = cookie-secret
                 }
               }
-             }
-             }
+            }
+          }
 
           resources {
             limits = {
