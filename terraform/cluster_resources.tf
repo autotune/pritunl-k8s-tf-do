@@ -26,7 +26,7 @@ resource "kubernetes_deployment" "oath_deployments" {
           name  = "oauth2-proxy"
           args  = ["--provider=github", "--email-domain=*", "--upstream=file:///dev/null",
                    "--http-address=0.0.0.0:4180", "--whitelist-domain=.${var.domain_name[0]}", 
-                   "--cookie-domain=.${var.domain_name[0]"]
+                   "--cookie-domain=.${var.domain_name[0]}"]
           port {
             container_port = 80
           }
