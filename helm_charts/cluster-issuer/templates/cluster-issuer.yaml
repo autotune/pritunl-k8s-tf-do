@@ -31,11 +31,11 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: ssl-com
+  name: zerossl 
 spec:
   acme:
     email: {{ .Values.letsencrypt_email }}
-    server: https://acme.ssl.com/sslcom-dv-rsa
+    server: https://acme.zerossl.com/v2/DV90
     externalAccountBinding:
       keyID: {{ .Values.sslcom_keyid }}
       keySecretRef:
