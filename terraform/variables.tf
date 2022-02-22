@@ -118,6 +118,6 @@ variable "oath_client_id" {
   type = string
 }
 
-variable "oath_client_id_secret" {
+variable "oath_client_secret" {
   type = string
 }
