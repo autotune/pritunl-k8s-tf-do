@@ -141,7 +141,7 @@ resource "kubernetes_service" "sample_services" {
 
 resource "kubernetes_deployment" "atlantis_deployments" {
 
-  depends_on = [digitalocean_kubernetes_cluster.k8s, kubernetes_namespace.oath_proxy]
+  depends_on = [digitalocean_kubernetes_cluster.k8s, kubernetes_namespace.oauth_proxy]
 
   for_each = toset(var.domain_name)
   metadata {
