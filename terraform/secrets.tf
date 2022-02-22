@@ -1,10 +1,22 @@
-resource "kubernetes_secret" "do_token" {
+resource "kubernetes_secret" "eab_hmac" {
   metadata {
-    name = "do-token"
+    name = "sslcom-hmac-key"
   }
 
   data = {
-    access-token = base64encode(var.do_token)
+    sslcom_hmac_key = base64encode(var.sslcom_hmac_key)
+  }
+
+  type = "kubernetes.io/opaque"
+}
+
+resource "kubernetes_secret" "private_eab_hmac" {
+  metadata {
+    name = "sslcom-private-hmac-key"
+  }
+
+  data = {
+    sslcom_private_hmac_key = base64encode(var.sslcom_private_hmac_key)
   }
 
   type = "kubernetes.io/opaque"

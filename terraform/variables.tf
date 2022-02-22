@@ -102,3 +102,14 @@ variable "github_token" {
   type = string
 }
 
+varfiable "sslcom_keyid" {
+  type = string
+}
+
+variable "sslcom_hmac_key" {
+  type = string
+} 
+
+variable "sslcom_private_hmac_key" {
+  type = string
+} 

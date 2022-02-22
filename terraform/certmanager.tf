@@ -13,20 +13,28 @@ resource "helm_release" "cert-manager" {
     value = "true"
   }
   set {
-    name = "installCRDs"
+    name  = "installCRDs"
     value = "true"
   }
 }
 
 resource "helm_release" "cluster-issuer" {
-  name      = "cluster-issuer"
-  chart     = "../helm_charts/cluster-issuer"
-  namespace = "kube-system"
+  name       = "cluster-issuer"
+  chart      = "../helm_charts/cluster-issuer"
+  namespace  = "kube-system"
   depends_on = [
     helm_release.cert-manager,
   ]
   set {
     name  = "letsencrypt_email"
     value = "${var.letsencrypt_email}"
+  }
+  set {
+    name = sslcom_keyid
+    value = "${var.sslcom_keyid}"
+  }
+  set {
+    name  = sslcom_private_hmac_key
+    value = "${var.sslcom_private_hmac_key}"
   }
 }
