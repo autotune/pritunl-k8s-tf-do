@@ -6,6 +6,6 @@ resource "kubernetes_namespace" "atlantis" {
 
 resource "kubernetes_namespace" "oath_proxy" {
   metadata {
-    name = "oath-proxy"
+    name = "oauth-proxy"
   }
 }
