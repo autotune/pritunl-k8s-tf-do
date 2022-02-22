@@ -114,10 +114,10 @@ variable "sslcom_private_hmac_key" {
   type = string
 } 
 
-variable "oath_client_id" {
+variable "oauth_client_id" {
   type = string
 }
 
-variable "oath_client_secret" {
+variable "oauth_client_secret" {
   type = string
 }
