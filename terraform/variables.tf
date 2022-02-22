@@ -102,7 +102,7 @@ variable "github_token" {
   type = string
 }
 
-varfiable "sslcom_keyid" {
+variable "sslcom_keyid" {
   type = string
 }
 
