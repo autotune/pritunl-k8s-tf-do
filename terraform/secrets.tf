@@ -1,6 +1,7 @@
 resource "kubernetes_secret" "eab_hmac" {
   metadata {
-    name = "sslcom-hmac-key"
+    name      = "sslcom-hmac-key"
+    namespace = "kube-system"
   }
 
   data = {
