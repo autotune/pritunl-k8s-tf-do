@@ -29,7 +29,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
         "cert-manager.io/cluster-issuer" = "zerossl"
-        "ingress.annotations.nginx\.ingress\.kubernetes\.io/whitelist-source-range" = data.github_ip_ranges.default.git_ipv4
+        "ingress.annotations.nginx.ingress.kubernetes.io/whitelist-source-range" = data.github_ip_ranges.default.git_ipv4
     }
   }
   spec {
