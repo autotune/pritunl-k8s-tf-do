@@ -1,23 +1,23 @@
-resource "kubernetes_deployment" "oath_deployments" {
+resource "kubernetes_deployment" "oauth_deployments" {
 
   depends_on = [digitalocean_kubernetes_cluster.k8s] 
 
   for_each = toset(var.domain_name)
   metadata {
-    name = "${replace(each.value, ".", "-")}-oath2-deployment"
+    name = "${replace(each.value, ".", "-")}-oauth2-deployment"
     namespace="oath-proxy"
   }
   spec {
     replicas = 2
     selector {
       match_labels = {
-        app = "${replace(each.value, ".", "-")}-oath2-deployment"
+        app = "${replace(each.value, ".", "-")}-oauth2-deployment"
       }
     }
     template {
       metadata {
         labels = {
-          app  = "${replace(each.value, ".", "-")}-oath2-deployment"
+          app  = "${replace(each.value, ".", "-")}-oauth2-deployment"
         }
       }
       spec {
