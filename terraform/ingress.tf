@@ -91,7 +91,7 @@ resource "kubernetes_ingress" "oauth_cluster_ingress" {
     dynamic "tls" {
       for_each = toset(var.domain_name)
       content {
-        secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
+        secret_name = "${replace(tls.value, ".", "-")}-oauth-tls"
         hosts = ["auth.${tls.value}"]
       }
     }
