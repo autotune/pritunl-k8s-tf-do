@@ -22,7 +22,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
       }
       spec {
         container {
-          image = "bitnami/oauth2-proxy:latest"
+          image = "quay.io/pusher/oauth2_proxy:latest"
           name  = "oauth2-proxy"
           args  = ["--provider=digitalocean", "--email-domain=*", "--upstream=file:///dev/null",
                    "--http-address=0.0.0.0:4180", "--whitelist-domain=auth.${each.key}", 
