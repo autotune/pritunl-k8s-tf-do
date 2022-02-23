@@ -24,7 +24,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   ]
   for_each = toset(var.domain_name)
   metadata {
-    name = "${var.do_k8s_name}-atlantis-ingress"
+    name = "${each.key}-atlantis-ingress"
     namespace  = "atlantis"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
@@ -36,7 +36,6 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   }
   spec {
     dynamic "rule" {
-      for_each = toset(var.domain_name)
       content {
         host = "atlantis.${rule.value}"
         http {
