@@ -25,10 +25,10 @@ resource "kubernetes_deployment" "oauth_deployments" {
           image = "bitnami/oauth2-proxy:latest"
           name  = "oauth2-proxy"
           args  = ["--provider=github", "--email-domain=*", "--upstream=file:///dev/null",
-                   "--http-address=0.0.0.0:4180", "--whitelist-domain=.${var.domain_name[0]}", 
-                   "--cookie-domain=.${var.domain_name[0]}"]
+                   "--http-address=0.0.0.0:4180", "--whitelist-domain=auth.${each.key}", 
+                   "--cookie-domain=auth.${each.key}"]
           port {
-            container_port = 80
+            container_port = 4180
           }
 
           env { 
