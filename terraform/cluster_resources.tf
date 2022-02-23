@@ -35,7 +35,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
               name       = "OAUTH2_PROXY_CLIENT_ID"
               value_from {
                 secret_key_ref {
-                  name = "${replace(tls.value, ".", "-")}-oauth-proxy-tls"
+                  name = "${replace(each.key, ".", "-")}-oauth-proxy-tls"
                   key  = "github-client-id"
                  }
                }
