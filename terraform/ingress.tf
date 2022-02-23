@@ -1,5 +1,3 @@
-data "github_ip_ranges" "default" {}
-
 resource "helm_release" "nginx_ingress_chart" {
   name       = "nginx-ingress-controller"
   namespace  = "default"

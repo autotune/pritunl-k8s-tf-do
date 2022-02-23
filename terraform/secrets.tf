@@ -27,7 +27,7 @@ resource "kubernetes_secret" "oath_proxy_secret" {
   data = {
       github-client-id = base64encode(var.oauth_client_id)
       github-client-secret: base64encode(var.oauth_client_secret)
-      cookie-secret: base64encode(random_string.random.result)
+      cookie-secret: "j5q52WDJMuV513Fe3sv9Jg==" 
   }
 
   type = "kubernetes.io/opaque"
