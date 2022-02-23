@@ -44,7 +44,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
                name       = "OAUTH2_PROXY_CLIENT_SECRET"
                value_from {
                  secret_key_ref {
-                   name = "oauth-proxy-secret"
+                   name = "${replace(each.key, ".", "-")}-oauth-proxy-tls"
                    key  = "github-client-secret"
                  }
                }
@@ -53,7 +53,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
               name       = "OAUTH2_PROXY_COOKIE_SECRET"
               value_from {
                 secret_key_ref {
-                  name = "oauth-proxy-secret"
+                  name = "${replace(each.key, ".", "-")}-oauth-proxy-tls"
                   key  = "cookie-secret"
                 }
               }
