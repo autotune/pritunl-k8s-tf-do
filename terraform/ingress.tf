@@ -22,6 +22,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   depends_on = [
     helm_release.nginx_ingress_chart
   ]
+  for_each = toset(var.domain_name)
   metadata {
     name = "${var.do_k8s_name}-atlantis-ingress"
     namespace  = "atlantis"
@@ -29,7 +30,8 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
         "cert-manager.io/cluster-issuer" = "zerossl"
-        # "ingress.annotations.nginx.ingress.kubernetes.io/whitelist-source-range" = format("%s/%s",join(",", data.github_ip_ranges.default.git_ipv4),"172.67.151.123/32")
+        "ingress.kubernetes.io/auth-url: https://auth.${each.key}/oauth2/auth"
+        "ingress.kubernetes.io/auth-signin: https://auth.${each.key}/oauth2/start?rd=https://$host$request_uri$is_args$args"
     }
   }
   spec {
