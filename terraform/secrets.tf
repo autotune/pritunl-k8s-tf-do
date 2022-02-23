@@ -18,8 +18,9 @@ resource "kubernetes_secret" "eab_hmac" {
 
 resource "kubernetes_secret" "oath_proxy_secret" {
   depends_on = [kubernetes_namespace.oauth_proxy]
+  for_each = toset(var.domain_name)
   metadata {
-    name      = "oauth-proxy-secret"
+    name      = "${replace(tls.value, ".", "-")}-oauth-proxy-tls"
     namespace = "oauth-proxy"
   }
 
