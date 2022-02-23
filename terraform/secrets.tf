@@ -20,7 +20,7 @@ resource "kubernetes_secret" "oath_proxy_secret" {
   depends_on = [kubernetes_namespace.oauth_proxy]
   for_each = toset(var.domain_name)
   metadata {
-    name      = "${replace(tls.value, ".", "-")}-oauth-proxy-tls"
+    name      = "${replace(each.key, ".", "-")}-oauth-proxy-tls"
     namespace = "oauth-proxy"
   }
 
