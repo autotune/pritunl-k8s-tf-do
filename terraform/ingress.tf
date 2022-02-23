@@ -38,7 +38,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "atlantis.${rule.value}"
+        host = "${rule.value}"
         http {
           path {
             backend {
@@ -54,7 +54,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["atlantis.${tls.value}"]
+        hosts = ["${tls.value}"]
       }
     }
   }
