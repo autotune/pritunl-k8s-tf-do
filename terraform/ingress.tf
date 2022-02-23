@@ -36,6 +36,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   }
   spec {
     dynamic "rule" {
+      for_each = toset(var.domain_name)
       content {
         host = "atlantis.${rule.value}"
         http {
