@@ -26,7 +26,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
           name  = "oauth2-proxy"
           args  = ["--provider=digitalocean", "--email-domain=*", "--upstream=file:///dev/null",
                    "--http-address=0.0.0.0:4180", "--whitelist-domain=.${each.key}", 
-                   "--cookie-domain=.${each.key}"]
+                   "--cookie-domain=.${each.key} --redirect-url=https://${each.key}/oauth2/callback"]
           port {
             container_port = 4180
           }
