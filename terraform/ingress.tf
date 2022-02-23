@@ -83,7 +83,7 @@ resource "kubernetes_ingress" "oauth_cluster_ingress" {
               service_name = "${replace(rule.value, ".", "-")}-oauth2-service"
               service_port = 4180
             }
-            path = "/"
+            path = "/oath2"
           }
         }
       }
