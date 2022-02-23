@@ -126,15 +126,16 @@ resource "kubernetes_service" "sample_services" {
 
   for_each = toset(var.domain_name)
   metadata {
-    name      = "${replace(each.value, ".", "-")}-service"
-    namespace = "default"
+    name      = "${replace(each.value, ".", "-")}-oauth2-service"
+    namespace = "oauth-proxy"
   }
   spec {
     selector = {
-      app = "${replace(each.value, ".", "-")}-deployment"
+      app = "${replace(each.value, ".", "-")}-oauth2-deployment"
     }
     port {
-      port = 80
+      port       = 4180
+      targetPort = 4180
     }
   }
 }
