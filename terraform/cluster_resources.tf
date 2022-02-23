@@ -75,8 +75,6 @@ resource "kubernetes_deployment" "oauth_deployments" {
   }
 }
 
-}
-
 resource "kubernetes_service" "oath_services" {
 
   depends_on = [digitalocean_kubernetes_cluster.k8s]
