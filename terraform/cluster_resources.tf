@@ -8,7 +8,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
     namespace="oauth-proxy"
   }
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
         app = "${replace(each.value, ".", "-")}-oauth2-deployment"
@@ -24,7 +24,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
         container {
           image = "quay.io/pusher/oauth2_proxy:latest"
           name  = "oauth2-proxy"
-          args  = ["--provider=digitalocean", "--email-domain=*", "--upstream=file:///dev/null",
+          args  = ["--provider=digitalocean", "--email-domain=contrasting.org", "--upstream=file:///dev/null",
                    "--http-address=0.0.0.0:4180", "--whitelist-domain=auth.${each.key}", 
                    "--cookie-domain=auth.${each.key} --redirect-url=https://${each.key}/oauth2/callback"]
           port {
@@ -75,7 +75,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
   }
 }
 
-resource "kubernetes_service" "oath_services" {
+resource "kubernetes_service" "oauth_services" {
 
   depends_on = [digitalocean_kubernetes_cluster.k8s]
 
