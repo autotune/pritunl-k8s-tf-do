@@ -134,8 +134,8 @@ resource "kubernetes_service" "sample_services" {
       app = "${replace(each.value, ".", "-")}-oauth2-deployment"
     }
     port {
-      port       = 4180
-      targetPort = 4180
+      port        = 4180
+      target_port = 4180
     }
   }
 }
