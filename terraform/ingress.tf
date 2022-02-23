@@ -64,7 +64,7 @@ resource "kubernetes_ingress" "oauth_cluster_ingress" {
   ]
   for_each = toset(var.domain_name)
   metadata {
-    name = "${var.do_k8s_name}-oauth2-ingress"
+    name = "${each.key}-oauth2-ingress"
     namespace  = "oauth-proxy"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
@@ -76,7 +76,7 @@ resource "kubernetes_ingress" "oauth_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${rule.value}"
+        host = "auth.${rule.value}"
         http {
           path {
             backend {
@@ -92,7 +92,7 @@ resource "kubernetes_ingress" "oauth_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["${tls.value}"]
+        hosts = ["auth.${tls.value}"]
       }
     }
   }
