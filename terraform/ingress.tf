@@ -62,9 +62,10 @@ resource "kubernetes_ingress" "oath_cluster_ingress" {
   depends_on = [
     helm_release.nginx_ingress_chart
   ]
+  for_each = toset(var.domain_name)
   metadata {
-    name = "${var.do_k8s_name}-atlantis-ingress"
-    namespace  = "atlantis"
+    name = "${var.do_k8s_name}-oath2-ingress"
+    namespace  = "oath-proxy"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
