@@ -141,7 +141,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
 
           env {
             name  = "ATLANTIS_ATLANTIS_URL"
-            value = "https://atlantis.${each.value}"
+            value = "https://${each.value}"
           }
 
           env {
