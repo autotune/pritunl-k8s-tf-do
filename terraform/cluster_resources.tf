@@ -24,7 +24,7 @@ resource "kubernetes_deployment" "oauth_deployments" {
         container {
           image = "quay.io/pusher/oauth2_proxy:latest"
           name  = "oauth2-proxy"
-          args  = ["--provider=digitalocean", "--email-domain=contrasting.org", "--upstream=file:///dev/null",
+          args  = ["--provider=digitalocean", "--email-domain=${each.key}", "--upstream=file:///dev/null",
                    "--http-address=0.0.0.0:4180", "--whitelist-domain=auth.${each.key}", 
                    "--cookie-domain=auth.${each.key} --redirect-url=https://auth.${each.key}/oauth2/callback"]
           port {
