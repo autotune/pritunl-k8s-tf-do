@@ -1,5 +1,5 @@
 data "template_file" "oauth2_proxy" {
-	template = file("./templates/oauth2-proxy-values.yml")
+	template = file("./templates/oauth2-proxy-values.yaml")
 
   	vars = {
           OAUTH_CLIENT_ID     = var.oauth_client_id 
