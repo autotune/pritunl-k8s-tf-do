@@ -36,8 +36,7 @@ resource "helm_release" "oauth2_proxy" {
 
   set {
     name  = "ingress.annotations"
-    value = "[ kubernetes.io/ingress.class: nginx, kubernetes.io/tls-acme: \"true\", 
-             cert-manager.io/cluster-issuer: \"zerossl\"]" 
+    value = "[ kubernetes.io/ingress.class: nginx, kubernetes.io/tls-acme: \"true\", cert-manager.io/cluster-issuer: \"zerossl\"]" 
   }
 }
 
