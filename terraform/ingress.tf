@@ -92,7 +92,7 @@ resource "kubernetes_ingress" "oauth_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-oauth-proxy-tls"
-        hosts = ["auth.${tls.value}"]
+        hosts = ["${tls.value}"]
       }
     }
   }
