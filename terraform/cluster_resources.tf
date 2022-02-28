@@ -1,3 +1,15 @@
+data "template_file" "oauth2_proxy" {
+	template = file("./templates/oauth2-proxy-values.yml")
+
+  	vars = {
+          OAUTH_CLIENT_ID     = var.oauth_client_id 
+          OAUTH_CLIENT_SECRET = var.oauth_client_secret
+          OAUTH_COOKIE_SECRET = var.oauth_cookie_secret
+          HOST                = var.domain_name[0]
+          TLS_SECRET          = "${replace(var.domain_name[0], ".", "-")}-oauth-proxy-tls"
+	}
+}
+
 resource "helm_release" "oauth2_proxy" {
   for_each   = toset(var.domain_name)
   name       = "${replace(each.key, ".", "-")}-oauth2-proxy"
@@ -5,40 +17,9 @@ resource "helm_release" "oauth2_proxy" {
   repository = "https://oauth2-proxy.github.io/manifests"
   chart      = "oauth2-proxy"
 
-  set {
-    name  = "config.clientID"
-    value = "${var.oauth_client_id}"
-  }
-
-  set {
-    name  = "config.clientSecret"
-    value = "${var.oauth_client_secret}"
-  }
-
-  set {
-    name  = "config.cookieSecret"
-    value = "${var.oauth_cookie_secret}"
-  }
-
-  set {
-    name  = "ingress.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "ingress.path"
-    value = "/oauth2"
-  }
-
-  set {
-    name  = "ingress.hosts"
-    value = each.key
-  }
-
-  set {
-    name  = "ingress.annotations"
-    value = "[ \"kubernetes.io/ingress.class: nginx\"]" 
-  }
+  values = [
+  	data.template_file.oauth2_proxy.rendered
+  ]
 }
 
 resource "kubernetes_deployment" "atlantis_deployments" {
