@@ -31,7 +31,7 @@ resource "helm_release" "oauth2_proxy" {
 
   set {
     name  = "ingress.hosts"
-    value = var.domain_name[0]
+    value = var.domain_name
   }
 
   set {
