@@ -45,6 +45,13 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
             }
             path = "/"
           }
+          path {
+            backend {
+              service_name = "${replace(rule.value, ".", "-")}-oauth2-proxy"
+              service_port = 80 
+            }
+            path = "/oauth2"
+          }
         }
       }
     }

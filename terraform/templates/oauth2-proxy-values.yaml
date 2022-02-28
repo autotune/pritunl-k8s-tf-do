@@ -88,7 +88,7 @@ serviceAccount:
   annotations: {}
 
 ingress:
-  enabled: true 
+  enabled: false 
   # className: nginx
   path: /oauth2
   # Only used if API capabilities (networking.k8s.io/v1) allow it
