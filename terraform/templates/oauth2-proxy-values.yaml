@@ -9,7 +9,7 @@ config:
   annotations: {}
   clientID: ${OAUTH_CLIENT_ID} 
   clientSecret: ${OAUTH_CLIENT_SECRET} 
-  cookieSecret: ${OAUTH_CLIENT_COOKIE}
+  cookieSecret: ${OAUTH_COOKIE_SECRET}
   tlsSecret: ${TLS_SECRET} 
 
 alphaConfig:
