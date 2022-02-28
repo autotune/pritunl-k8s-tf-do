@@ -1,6 +1,6 @@
 resource "helm_release" "oauth2_proxy" {
   for_each   = toset(var.domain_name)
-  name       = "${replace(rule.value, ".", "-")}-oauth2-proxy"
+  name       = "${replace(each.key, ".", "-")}-oauth2-proxy"
 
   repository = "https://oauth2-proxy.github.io/manifests"
   chart      = "oauth2-proxy"
