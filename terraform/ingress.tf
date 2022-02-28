@@ -36,7 +36,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "atlantis.${rule.value}"
+        host = "${rule.value}"
         http {
           path {
             backend {
@@ -52,46 +52,6 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["atlantis.${tls.value}"]
-      }
-    }
-  }
-}
-
-resource "kubernetes_ingress" "oauth_cluster_ingress" {
-  depends_on = [
-    helm_release.nginx_ingress_chart
-  ]
-  for_each = toset(var.domain_name)
-  metadata {
-    name = "${each.key}-oauth2-ingress"
-    namespace  = "oauth-proxy"
-    annotations = {
-        "kubernetes.io/ingress.class" = "nginx"
-        "ingress.kubernetes.io/rewrite-target" = "/"
-        "cert-manager.io/cluster-issuer" = "zerossl"
-    }
-  }
-  spec {
-    dynamic "rule" {
-      for_each = toset(var.domain_name)
-      content {
-        host = "auth.${rule.value}"
-        http {
-          path {
-            backend {
-              service_name = "${replace(rule.value, ".", "-")}-oauth2-service"
-              service_port = 4180
-            }
-            path = "/oauth2"
-          }
-        }
-      }
-    }
-    dynamic "tls" {
-      for_each = toset(var.domain_name)
-      content {
-        secret_name = "${replace(tls.value, ".", "-")}-oauth-proxy-tls"
         hosts = ["${tls.value}"]
       }
     }
