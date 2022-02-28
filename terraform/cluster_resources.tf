@@ -1,97 +1,43 @@
-resource "kubernetes_deployment" "oauth_deployments" {
+resource "helm_release" "oauth2_proxy" {
+  name       = "oauth2-proxy"
 
-  depends_on = [digitalocean_kubernetes_cluster.k8s] 
+  repository = "https://oauth2-proxy.github.io/manifests"
+  chart      = "oauth2-proxy"
 
-  for_each = toset(var.domain_name)
-  metadata {
-    name = "${replace(each.value, ".", "-")}-oauth2-deployment"
-    namespace="oauth-proxy"
+  set {
+    name  = "config.clientID"
+    value = "${var.oauth_client_id}"
   }
-  spec {
-    replicas = 1
-    selector {
-      match_labels = {
-        app = "${replace(each.value, ".", "-")}-oauth2-deployment"
-      }
-    }
-    template {
-      metadata {
-        labels = {
-          app  = "${replace(each.value, ".", "-")}-oauth2-deployment"
-        }
-      }
-      spec {
-        container {
-          image = "quay.io/pusher/oauth2_proxy:latest"
-          name  = "oauth2-proxy"
-          args  = ["--provider=digitalocean", "--email-domain=${each.key}", "--upstream=file:///dev/null",
-                   "--http-address=0.0.0.0:4180", "--whitelist-domain=auth.${each.key}", 
-                   "--cookie-domain=auth.${each.key} --redirect-url=https://auth.${each.key}/oauth2/callback"]
-          port {
-            container_port = 4180
-          }
 
-          env { 
-              name       = "OAUTH2_PROXY_CLIENT_ID"
-              value_from {
-                secret_key_ref {
-                  name = "${replace(each.key, ".", "-")}-oauth-proxy-tls"
-                  key  = "github-client-id"
-                 }
-               }
-           }
-          env {
-               name       = "OAUTH2_PROXY_CLIENT_SECRET"
-               value_from {
-                 secret_key_ref {
-                   name = "${replace(each.key, ".", "-")}-oauth-proxy-tls"
-                   key  = "github-client-secret"
-                 }
-               }
-           }
-          env {
-              name       = "OAUTH2_PROXY_COOKIE_SECRET"
-              value_from {
-                secret_key_ref {
-                  name = "${replace(each.key, ".", "-")}-oauth-proxy-tls"
-                  key  = "cookie-secret"
-                }
-              }
-           }
-
-          resources {
-            limits = {
-              memory = "512M"
-              cpu = "1"
-            }
-            requests = {
-              memory = "256M"
-              cpu = "50m"
-            }
-          }
-        }
-      }
-    }
+  set {
+    name  = "config.clientSecret"
+    value = "${var.oauth_client_secret}"
   }
-}
 
-resource "kubernetes_service" "oauth_service" {
-
-  depends_on = [digitalocean_kubernetes_cluster.k8s]
-
-  for_each = toset(var.domain_name)
-  metadata {
-    name      = "${replace(each.value, ".", "-")}-oauth2-service"
-    namespace = "oauth-proxy"
+  set {
+    name  = "config.cookieSecret"
+    value = "${var.oauth_cookie_secret}"
   }
-  spec {
-    selector = {
-      app = "${replace(each.value, ".", "-")}-oauth2-deployment"
-    }
-    port {
-      port        = 4180
-      target_port = 4180
-    }
+
+  set {
+    name  = "ingress.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "ingress.path"
+    value = "/oauth2"
+  }
+
+  set {
+    name  = "ingress.hosts"
+    value = "[${var.domain_name}]"
+  }
+
+  set {
+    name  = "ingress.annotations"
+    value = "[ kubernetes.io/ingress.class: nginx, kubernetes.io/tls-acme: \"true\", 
+             cert-manager.io/cluster-issuer: \"zerossl\"]" 
   }
 }
 
