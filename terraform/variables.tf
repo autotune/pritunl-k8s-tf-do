@@ -121,3 +121,7 @@ variable "oauth_client_id" {
 variable "oauth_client_secret" {
   type = string
 }
+
+variable "oauth_cookie_secret" {
+  type = string
+}
