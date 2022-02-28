@@ -1,5 +1,6 @@
 resource "helm_release" "oauth2_proxy" {
-  name       = "oauth2-proxy"
+  for_each   = toset(var.domain_name)
+  name       = "${replace(rule.value, ".", "-")}-oauth2-proxy"
 
   repository = "https://oauth2-proxy.github.io/manifests"
   chart      = "oauth2-proxy"
@@ -31,7 +32,7 @@ resource "helm_release" "oauth2_proxy" {
 
   set {
     name  = "ingress.hosts"
-    value = var.domain_name
+    value = each.key
   }
 
   set {
