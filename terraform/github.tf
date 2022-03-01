@@ -2,6 +2,8 @@ provider "github" {
   token        = var.github_token
 }
 
+data "github_ip_ranges" "default" {}
+
 resource "random_id" "webhook" {
   byte_length = "64"
 }
