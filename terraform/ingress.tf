@@ -3,6 +3,7 @@ resource "helm_release" "nginx_ingress_chart" {
   namespace  = "default"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx-ingress-controller"
+
   set {
     name  = "service.type"
     value = "LoadBalancer"
@@ -11,6 +12,11 @@ resource "helm_release" "nginx_ingress_chart" {
     name  = "service.annotations.kubernetes\\.digitalocean\\.com/load-balancer-id"
     value = digitalocean_loadbalancer.ingress_load_balancer.id
   }
+  set {
+    name  = "service.beta.kubernetes.io/do-loadbalancer-hostname"
+    value = var.domain_name[0]
+  }
+
   depends_on = [
     digitalocean_loadbalancer.ingress_load_balancer
   ]
