@@ -70,7 +70,7 @@ resource "kubernetes_ingress" "oauth2_cluster_ingress" {
   ]
   for_each = toset(var.domain_name)
   metadata {
-    name = "${each.key}-atlantis-ingress"
+    name = "${each.key}-oauth2-ingress"
     namespace  = "atlantis"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
