@@ -28,7 +28,7 @@ resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
   ]
   for_each = toset(var.domain_name)
   metadata {
-    name = "${each.key}-atlantis-ingress"
+    name = "${each.key}-atlantis-events-ingress"
     namespace  = "atlantis"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
