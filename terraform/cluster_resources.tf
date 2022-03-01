@@ -69,7 +69,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
 
           env {
             name  = "ATLANTIS_ATLANTIS_URL"
-            value = "https://terraform.${each.value}"
+            value = "https://${each.value}"
           }
 
           env {
@@ -91,6 +91,11 @@ resource "kubernetes_deployment" "atlantis_deployments" {
             name  = "ATLANTIS_REPO_WHITELIST"
             value = var.atlantis_repo_whitelist
           }
+
+           env {
+            name  = "DIGITALOCEAN_TOKEN"
+            value = var.do_token 
+           }
 
           resources {
             limits = {
