@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths-ignore:
-      - '**/atlantis/**'
+      - 'terraform/atlantis/**'
 
 jobs:
   tf_fmt:
