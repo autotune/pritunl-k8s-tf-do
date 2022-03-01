@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - '**/atlantis/**'
 
 jobs:
   tf_fmt:
