@@ -13,6 +13,7 @@ data "template_file" "oauth2_proxy" {
 resource "helm_release" "oauth2_proxy" {
   for_each   = toset(var.domain_name)
   name       = "${replace(each.key, ".", "-")}-oauth2-proxy"
+  namespace  = "atlantis"
 
   repository = "https://oauth2-proxy.github.io/manifests"
   chart      = "oauth2-proxy"
