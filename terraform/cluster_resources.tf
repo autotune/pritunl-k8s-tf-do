@@ -69,7 +69,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
 
           env {
             name  = "ATLANTIS_ATLANTIS_URL"
-            value = "https://${each.value}"
+            value = "https://terraform.${each.value}"
           }
 
           env {
