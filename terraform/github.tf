@@ -17,7 +17,7 @@ resource "github_repository_webhook" "hook" {
   configuration {
     url          = "https://${each.value}/events"
     content_type = "application/json"
-    insecure_ssl = true
+    insecure_ssl = false  
     secret       = random_id.webhook.hex
   }
 
