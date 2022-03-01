@@ -34,7 +34,7 @@ resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
         "cert-manager.io/cluster-issuer" = "zerossl"
-        "nginx.ingress.kubernetes.io/whitelist-source-range" = ${cidrhost(element(data.github_ip_ranges.default.hooks, 0), 0)}
+        "nginx.ingress.kubernetes.io/whitelist-source-range" = local.gh_ips 
     }
   }
   spec {
