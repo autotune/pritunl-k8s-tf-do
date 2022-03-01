@@ -20,7 +20,7 @@ resource "digitalocean_record" "atlantis" {
   domain = each.value
   type   = "A"
   ttl = 60
-  name   = "atlantis"
+  name   = "terraform"
   value  = digitalocean_loadbalancer.ingress_load_balancer.ip
   depends_on = [
     kubernetes_ingress.atlantis_cluster_ingress
