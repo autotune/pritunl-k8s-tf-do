@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths-ignore:
+      - 'terraform/atlantis.yaml'
       - 'terraform/atlantis/**'
 
 jobs:
