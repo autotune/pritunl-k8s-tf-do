@@ -1,5 +1,5 @@
 data "digitalocean_kubernetes_cluster" "k8s" {
-  name = local.name
+  name = var.do_k8s_name 
 }
 
 provider "kubernetes" {
