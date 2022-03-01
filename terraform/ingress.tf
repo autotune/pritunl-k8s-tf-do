@@ -34,7 +34,7 @@ resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
         "cert-manager.io/cluster-issuer" = "zerossl"
-        "nginx.ingress.kubernetes.io/whitelist-source-range" = join(",", (local.gh_ips))
+        "nginx.ingress.kubernetes.io/whitelist-source-range" = concat(join(",", (local.gh_ips)), local.extra_ips)
     }
   }
   spec {
