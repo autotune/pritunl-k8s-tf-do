@@ -33,7 +33,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
     namespace="atlantis"
   }
   spec {
-    replicas = 2
+    replicas = 1 
     selector {
       match_labels = {
         app = "${replace(each.value, ".", "-")}-atlantis-deployment"
