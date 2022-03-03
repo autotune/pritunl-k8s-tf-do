@@ -23,7 +23,7 @@ resource "helm_release" "oauth2_proxy" {
   ]
 }
 
-resource "kubernetes_deployment" "atlantis_deployments" {
+resource "kubernetes_deployment" "atlantis_deployment" {
 
   depends_on = [digitalocean_kubernetes_cluster.k8s, kubernetes_namespace.oauth_proxy]
 
@@ -110,6 +110,16 @@ resource "kubernetes_deployment" "atlantis_deployments" {
            env {
             name  = "TF_VAR_do_token"
             value = var.do_token
+           }
+
+           env { 
+            name  = "TF_VAR_auth_client_id"
+            value = var.auth_client_id
+           }
+
+           env { 
+            name  = "TF_VAR_oauth_client_secret"
+            value = var.oauth_client_secret
            }
 
           resources {
