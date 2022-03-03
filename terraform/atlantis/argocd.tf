@@ -15,5 +15,5 @@ resource "helm_release" "argocd" {
   namespace  = "argocd" 
   version    = var.argocd_helm_chart_version == "" ? null : var.argocd_helm_chart_version
 
-  values = [ for h in data.template_file.argocd : h ]
+  values = [ "${file(data.template_file.argocd)}" ]
 }
