@@ -11,6 +11,10 @@ variable "oauth_client_secret" {
   type = string
 }
 
+variable "argocd_server_host" {
+  type    = string
+}
+
 variable "argocd_ingress_enabled" {
   type    = string
   default = "true"
