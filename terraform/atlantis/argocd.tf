@@ -17,18 +17,7 @@ resource "helm_release" "argocd" {
 
   values = [
     templatefile(
-      "${path.module}/argocd/values.yaml.tpl",
-      {
-        "argocd_server_host"          = var.argocd_server_host
-        "argocd_github_client_id"     = var.oauth_client_id
-        "argocd_github_client_secret" = var.oauth_client_secret
-
-        "argocd_ingress_enabled"                 = var.argocd_ingress_enabled
-        "argocd_ingress_tls_acme_enabled"        = var.argocd_ingress_tls_acme_enabled
-        "argocd_ingress_ssl_passthrough_enabled" = var.argocd_ingress_ssl_passthrough_enabled
-        "argocd_ingress_class"                   = var.argocd_ingress_class
-        "argocd_ingress_tls_secret_name"         = var.argocd_ingress_tls_secret_name
-      }
+        data.template_file.argocd  
     )
   ]
 }
