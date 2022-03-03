@@ -35,3 +35,7 @@ variable "argocd_ingress_tls_secret_name" {
   type    = string
   default = "argocd-cert"
 }
+
+variable "do_token" {
+  type    = string
+}
