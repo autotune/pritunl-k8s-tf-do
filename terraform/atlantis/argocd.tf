@@ -16,8 +16,6 @@ resource "helm_release" "argocd" {
   version    = var.argocd_helm_chart_version == "" ? null : var.argocd_helm_chart_version
 
   values = [
-    templatefile(
-        data.template_file.argocd  
-    )
+    data.template_file.argocd  
   ]
 }
