@@ -3,12 +3,12 @@ variable "argocd_helm_chart_version" {
   default = "3.13.0"
 }
 
-variable "argocd_github_client_id" {
-  type    = string
+variable "oauth_client_id" {
+  type = string
 }
 
-variable "argocd_github_client_secret" {
-  type    = string
+variable "oauth_client_secret" {
+  type = string
 }
 
 variable "argocd_ingress_enabled" {
