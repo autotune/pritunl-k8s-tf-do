@@ -113,7 +113,7 @@ resource "kubernetes_deployment" "atlantis_deployment" {
            }
 
            env { 
-            name  = "TF_VAR_auth_client_id"
+            name  = "TF_VAR_oauth_client_id"
             value = var.auth_client_id
            }
 
