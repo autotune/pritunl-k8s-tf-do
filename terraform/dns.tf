@@ -38,3 +38,15 @@ resource "digitalocean_record" "auth" {
     kubernetes_ingress.atlantis_cluster_ingress
   ]
 }
+
+resource "digitalocean_record" "argocd" {
+  for_each = toset(var.domain_name)
+  domain = each.value
+  type   = "A"
+  ttl = 60
+  name   = "argocd"
+  value  = digitalocean_loadbalancer.ingress_load_balancer.ip
+  depends_on = [
+    kubernetes_ingress.atlantis_cluster_ingress
+  ]
+}
