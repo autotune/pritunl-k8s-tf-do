@@ -122,6 +122,11 @@ resource "kubernetes_deployment" "atlantis_deployment" {
             value = var.oauth_client_secret
            }
 
+           env { 
+            name  = "TF_VAR_argocd_server_host"
+            value = "argocd.${var.domain_name[0]}"
+           }
+
           resources {
             limits = {
               memory = "512M"
