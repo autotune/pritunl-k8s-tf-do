@@ -18,7 +18,7 @@ workflows:
       steps:
       - init
       - plan:
-          extra_args: ["-lock", "false"]
+          extra_args: ["-lock", "false" '-var="do_token=${{ secrets.DO_TOKEN }}"']
     apply:
       steps:
       - apply
