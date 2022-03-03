@@ -10,7 +10,7 @@ server:
     hosts:
       - ${ argocd_server_host }
     tls:
-      - secretName: argocd-secret
+      - secretName: argocd-${ argocd_server_host }-secret
         hosts:
           - ${ argocd_server_host }
 
