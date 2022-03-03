@@ -3,3 +3,9 @@ variable "do_k8s_name" {
   type        = string
   default     = "k8s-do"
 }
+
+variable "do_token" {
+  description = "Digital Ocean Personal access token"
+  type        = string
+  default     = ""
+}
