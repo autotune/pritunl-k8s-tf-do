@@ -39,3 +39,9 @@ variable "argocd_ingress_tls_secret_name" {
 variable "do_token" {
   type    = string
 }
+
+variable "do_k8s_name" {
+  description = "Digital Ocean Kubernetes cluster name (e.g. `k8s-do`)"
+  type        = string
+  default     = "k8s-do"
+}
