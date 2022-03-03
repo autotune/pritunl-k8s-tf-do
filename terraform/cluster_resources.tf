@@ -107,6 +107,11 @@ resource "kubernetes_deployment" "atlantis_deployments" {
             value = var.aws_secret_access_key 
            } 
 
+           env {
+            name  = TF_VAR_do_token
+            value = var.do_token
+           }
+
           resources {
             limits = {
               memory = "512M"
