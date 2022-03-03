@@ -108,7 +108,7 @@ resource "kubernetes_deployment" "atlantis_deployments" {
            } 
 
            env {
-            name  = TF_VAR_do_token
+            name  = "TF_VAR_do_token"
             value = var.do_token
            }
 
