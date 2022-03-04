@@ -5,7 +5,7 @@ projects:
 - name: production 
   dir: atlantis
   workspace: production
-  terraform_version: v0.13.0
+  terraform_version: v1.0.0
   delete_source_branch_on_merge: true
   autoplan:
     when_modified: ["atlantis/*.tf", "atlantis/modules/**/*.tf"]
