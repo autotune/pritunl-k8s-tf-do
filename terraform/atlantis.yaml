@@ -16,6 +16,7 @@ workflows:
   production:
     plan:
       steps:
+      - run: curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
       - run: helm plugin install https://github.com/jkroepke/helm-secrets --version v3.12.0
       - init
       - plan:
