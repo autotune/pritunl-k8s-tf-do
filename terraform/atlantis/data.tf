@@ -1,5 +1,5 @@
 data "template_file" "argocd" {
-  template = "${path.module}/argocd/values.yaml.tpl"
+  template = sensitive("${path.module}/argocd/values.yaml.tpl")
   vars = {
         argocd_server_host          = var.argocd_server_host
         argocd_github_client_id     = var.oauth_client_id
