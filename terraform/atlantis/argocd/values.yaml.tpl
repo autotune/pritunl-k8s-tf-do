@@ -20,7 +20,7 @@ server:
     certificate:
       - enabled: true 
       - name: zerossl
-      - secretName: argocd-${ argocd_server_host }-tls
+      - secretName: ${argocd_ingress_tls_secret_name} 
   config:
     url: https://${ argocd_server_host }
     admin.enabled: "true"
