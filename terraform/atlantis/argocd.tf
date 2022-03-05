@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "argocd" {
   }
 }
 
-resource "helm_release" "argocd" {
+resource "helm_release" "argo_cd" {
   depends_on = [kubernetes_namespace.argocd]
 
   name       = "argocd"
