@@ -60,16 +60,16 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "argocd.${var.domain_name[0]}",
+    "argocd.${var.domain_name}",
   ]
 
   ip_addresses = [
     "127.0.0.1",
-    digitalocean_loadbalancer.ingress_load_balancer.ip,
+    data.digitalocean_loadbalancer.default.ip,
   ]
 
   subject {
-    common_name  = var.domain_name[0]
+    common_name  = "argocd.${var.domain_name}"
     organization = "Atlantis"
   }
 }
