@@ -37,5 +37,5 @@ provider "helm" {
 }
 
 data "digitalocean_loadbalancer" "default" {
-  name = var.do_k8s_name 
+  name = "${var.do_k8s_name}-lb"
 }
