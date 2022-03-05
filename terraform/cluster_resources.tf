@@ -129,7 +129,7 @@ resource "kubernetes_deployment" "atlantis_deployment" {
 
            env {
             name  = "TF_VAR_domain_name"
-            value = var.domain_name
+            value = var.domain_name[0]
            }
 
           resources {
