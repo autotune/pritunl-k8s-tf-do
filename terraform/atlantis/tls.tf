@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "tls" {
   metadata {
     name      = "${replace(var.domain_name, ".", "-")}-argocd-tls"
-    namespace = "atlantis"
+    namespace = "argocd"
   }
 
   data = {
