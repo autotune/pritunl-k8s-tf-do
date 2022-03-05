@@ -1,7 +1,7 @@
 data "template_file" "argocd" {
   template = "${path.module}/argocd/values.yaml.tpl"
   vars = {
-        argocd_server_host          = var.argocd_server_host
+        argocd_server_host          = "argocd.${local.domain_name}"  
         argocd_github_client_id     = var.oauth_client_id
         argocd_github_client_secret = var.oauth_client_secret
 
@@ -9,7 +9,7 @@ data "template_file" "argocd" {
         argocd_ingress_tls_acme_enabled        = var.argocd_ingress_tls_acme_enabled
         argocd_ingress_ssl_passthrough_enabled = var.argocd_ingress_ssl_passthrough_enabled
         argocd_ingress_class                   = var.argocd_ingress_class
-        argocd_ingress_tls_secret_name         = var.argocd_ingress_tls_secret_name
+        argocd_ingress_tls_secret_name         = "${local.domain_name}-tls"
   }
 }
 

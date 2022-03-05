@@ -23,7 +23,7 @@ server:
       - secretName: argocd-${ argocd_server_host }-tls
   config:
     url: https://${ argocd_server_host }
-    admin.enabled: "false"
+    admin.enabled: "true"
     dex.config: |
       connectors:
         - type: github
