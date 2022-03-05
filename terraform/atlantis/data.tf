@@ -1,7 +1,7 @@
 data "template_file" "argocd" {
   template = "${path.module}/argocd/values.yaml.tpl"
   vars = {
-        argocd_server_host          = "argocd.${local.domain_name}"  
+        argocd_server_host          = "argocd.${var.domain_name}"  
         argocd_github_client_id     = var.oauth_client_id
         argocd_github_client_secret = var.oauth_client_secret
 
