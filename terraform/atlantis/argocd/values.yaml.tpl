@@ -12,14 +12,14 @@ server:
     hosts:
       - ${ argocd_server_host }
     tls:
-      - secretName: ${argocd_ingress_tls_secret_name} 
+      - secretName: ${ argocd_ingress_tls_secret_name } 
         hosts:
           - ${ argocd_server_host }
 
     certificate:
       - enabled: true 
       - name: zerossl
-      - secretName: ${argocd_ingress_tls_secret_name} 
+      - secretName: ${ argocd_ingress_tls_secret_name } 
   config:
     url: https://${ argocd_server_host }
     admin.enabled: "true"
