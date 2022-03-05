@@ -9,7 +9,7 @@ data "template_file" "argocd" {
         argocd_ingress_tls_acme_enabled        = var.argocd_ingress_tls_acme_enabled
         argocd_ingress_ssl_passthrough_enabled = var.argocd_ingress_ssl_passthrough_enabled
         argocd_ingress_class                   = var.argocd_ingress_class
-        argocd_ingress_tls_secret_name         = "${replace(${var.domain_name[0], ".", "-"})}-tls"
+        argocd_ingress_tls_secret_name         = "${replace(var.domain_name[0], ".", "-")}-tls"
   }
 }
 
