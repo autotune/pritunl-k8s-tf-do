@@ -127,6 +127,11 @@ resource "kubernetes_deployment" "atlantis_deployment" {
             value = "argocd.${var.domain_name[0]}"
            }
 
+           env {
+            name  = "TF_VAR_domain_name"
+            value = var.domain_name
+           }
+
           resources {
             limits = {
               memory = "512M"
