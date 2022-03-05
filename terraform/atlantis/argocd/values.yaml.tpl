@@ -3,7 +3,6 @@ installCRDs: false
 server:
   ingress:
     enabled: ${ argocd_ingress_enabled }
-    https: true
     annotations:
       kubernetes.io/ingress.class: ${ argocd_ingress_class }
       kubernetes.io/tls-acme: "${ argocd_ingress_tls_acme_enabled }"
