@@ -1,5 +1,3 @@
-# based off of https://github.com/anarkioteam/terraform-helm-argocd
-
 resource "kubernetes_namespace" "mongodb" {
   metadata {
     name = "mondodb"  
