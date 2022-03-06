@@ -53,3 +53,8 @@ variable "do_k8s_name" {
 variable "domain_name" {
   type = string  
 }
+
+variable "mongodb_version {
+  type = string
+  default = "4.4.13"
+}
