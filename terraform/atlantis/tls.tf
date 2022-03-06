@@ -1,7 +1,8 @@
 resource "kubernetes_secret" "tls" {
+  depends_on = [kubernetes_namespace.pritunl]
   metadata {
-    name      = "${replace(var.domain_name, ".", "-")}-argocd-tls"
-    namespace = "argocd"
+    name      = "${replace(var.domain_name, ".", "-")}-pritunl-tls"
+    namespace = "pritunl"
   }
 
   data = {
@@ -25,7 +26,7 @@ resource "tls_self_signed_cert" "ca" {
 
   subject {
     common_name  = "ca.local"
-    organization = "Atlantis"
+    organization = "Pritunl"
   }
 
   validity_period_hours = 8760
@@ -60,7 +61,7 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "argocd.${var.domain_name}",
+    "pritunl.${var.domain_name}",
   ]
 
   ip_addresses = [

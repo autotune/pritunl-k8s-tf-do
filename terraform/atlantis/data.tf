@@ -1,5 +1,6 @@
+/* 
 data "template_file" "argocd" {
-  template = "${path.module}/argocd/values.yaml.tpl"
+  template = "${path.module}/mongodb/values.yaml.tpl"
   vars = {
         argocd_server_host          = "argocd.${var.domain_name}"  
         argocd_github_client_id     = var.oauth_client_id
@@ -12,6 +13,7 @@ data "template_file" "argocd" {
         argocd_ingress_tls_secret_name         = "${var.domain_name}-argocd-tls"
   }
 }
+*/
 
 data "digitalocean_kubernetes_cluster" "k8s" {
   name = local.name
