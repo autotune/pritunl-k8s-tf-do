@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "mongodb" {
   metadata {
-    name = "mondodb"  
+    name = "mongodb"  
   }
 }
 
