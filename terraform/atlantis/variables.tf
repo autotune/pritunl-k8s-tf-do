@@ -56,5 +56,5 @@ variable "domain_name" {
 
 variable "mongodb_version" {
   type = string
-  default = "4.4.13"
+  default = "11.0.6"
 }
