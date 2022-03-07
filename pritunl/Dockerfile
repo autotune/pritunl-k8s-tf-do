@@ -1,7 +1,8 @@
 FROM ubuntu:20.04
 
-RUN apt update -q 
-    
+RUN apt update -q &&\
+    apt install gnupg2
+   
 RUN echo "deb [trusted=yes] http://repo.pritunl.com/stable/apt focal main" | tee /etc/apt/sources.list.d/pritunl.list
 
 RUN apt update &&\ 
