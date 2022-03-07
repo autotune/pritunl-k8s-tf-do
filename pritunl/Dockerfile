@@ -4,7 +4,8 @@ RUN apt update -q
     
 RUN echo "deb http://repo.pritunl.com/stable/apt focal main" | tee /etc/apt/sources.list.d/pritunl.list
 
-RUN apt --assume-yes install pritunl
+RUN apt update &&\ 
+    apt --assume-yes install pritunl
 
 RUN apt update -q &&\
     apt -y install apt-transport-https &&\
