@@ -6,4 +6,14 @@ resource "kubernetes_namespace" "pritunl" {
   }
 }
 
+resource "helm_release" "pritunl" {
+  depends_on = [kubernetes_namespace.pritunl, kubernetes_namespace.mondodb]
 
+  name       = "pritunl"
+  repository = "./helm_charts/pritunl"
+  chart      = "pritunl"
+  namespace  = "pritunl"
+  version    = "0.0.1" 
+
+  values   = [ sensitive(data.template_file.pritunl.rendered) ]
+}
