@@ -134,3 +134,10 @@ variable "aws_secret_access_key" {
   type = string
 }
 
+variable "package_registry_pat" {
+  type = string
+}
+
+variable "gh_username" {
+  type = string
+} 

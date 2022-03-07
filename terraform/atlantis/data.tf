@@ -2,6 +2,10 @@ data "template_file" "pritunl" {
   template = "${path.module}/pritunl/values.yaml.tpl"
 }
 
+data "template_file" "docker_registry" {
+  template = "${path.module}/docker/values.yaml.tpl"
+}
+
 data "digitalocean_kubernetes_cluster" "k8s" {
   name = local.name
 }
