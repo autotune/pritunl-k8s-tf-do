@@ -15,5 +15,5 @@ resource "helm_release" "pritunl" {
   namespace  = "pritunl"
   version    = "0.0.1" 
 
-  values   = [ sensitive(data.template_file.pritunl.rendered) ]
+  values   = [ data.template_file.pritunl.rendered ]
 }
