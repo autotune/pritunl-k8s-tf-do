@@ -1,0 +1,29 @@
+name: Deploy Dockerfile  
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'terraform/atlantis.yaml'
+      - 'terraform/atlantis/**'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    name: Build docker image
+    steps:
+      - uses: actions/checkout@master
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: GitHub Package Registry
+        uses: aevea/action-kaniko@master
+        with:
+          registry: docker.pkg.github.com
+          password: ${{ secrets.GITHUB_TOKEN }}
+          build_file: ./pritunl/Dockerfile 
+          image: pritunl
+          tag: ${{ steps.slug.outputs.sha8 }}
+          cache: true
+          cache_registry: cache
