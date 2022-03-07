@@ -1,18 +1,5 @@
 data "template_file" "pritunl" {
   template = "${path.module}/pritunl/values.yaml.tpl"
-  /* 
-  vars = {
-        argocd_server_host          = "argocd.${var.domain_name}"  
-        argocd_github_client_id     = var.oauth_client_id
-        argocd_github_client_secret = var.oauth_client_secret
-
-        argocd_ingress_enabled                 = var.argocd_ingress_enabled
-        argocd_ingress_tls_acme_enabled        = var.argocd_ingress_tls_acme_enabled
-        argocd_ingress_ssl_passthrough_enabled = var.argocd_ingress_ssl_passthrough_enabled
-        argocd_ingress_class                   = var.argocd_ingress_class
-        argocd_ingress_tls_secret_name         = "${var.domain_name}-argocd-tls"
-  }
-  */
 }
 
 data "digitalocean_kubernetes_cluster" "k8s" {

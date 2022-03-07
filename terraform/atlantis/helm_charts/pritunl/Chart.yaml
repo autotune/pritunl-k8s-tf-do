@@ -1,3 +1,4 @@
+apiVersion: v1
 name: pritunl 
 description: pritunl chart based off of https://github.com/articulate/helmcharts/blob/master/stable/pritunl
 version: 0.0.1
