@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "pritunl" {
 }
 
 resource "helm_release" "pritunl" {
-  depends_on = [kubernetes_namespace.pritunl, kubernetes_namespace.mondodb]
+  depends_on = [kubernetes_namespace.pritunl, kubernetes_namespace.mongodb]
 
   name       = "pritunl"
   repository = "./helm_charts/pritunl"
