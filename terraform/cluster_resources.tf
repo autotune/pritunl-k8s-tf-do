@@ -132,6 +132,16 @@ resource "kubernetes_deployment" "atlantis_deployment" {
             value = var.domain_name[0]
            }
 
+           env {
+            name  = "TF_VAR_gh_username"
+            value = var.gh_username
+           }
+
+           env {
+            name  = "TF_VAR_package_registry_pat"
+            value = var.package_registry_pat
+           }
+
           resources {
             limits = {
               memory = "1024M"
