@@ -23,7 +23,7 @@ jobs:
           registry: docker.pkg.github.com
           password: ${{ secrets.GITHUB_TOKEN }}
           build_file: ./pritunl/Dockerfile
-          image: autotune/pritunl
+          image: autotune/pritunl-k8s-tf-do/pritunl
           tag: ${{ steps.slug.outputs.sha8 }}
           cache: true
           cache_registry: cache
