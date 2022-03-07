@@ -134,8 +134,8 @@ resource "kubernetes_deployment" "atlantis_deployment" {
 
           resources {
             limits = {
-              memory = "512M"
-              cpu = "1"
+              memory = "1024M"
+              cpu = "2"
             }
             requests = {
               memory = "256M"

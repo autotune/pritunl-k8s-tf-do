@@ -49,3 +49,12 @@ variable "do_k8s_name" {
   type        = string
   default     = "k8s-do"
 }
+
+variable "domain_name" {
+  type = string  
+}
+
+variable "mongodb_version" {
+  type = string
+  default = "11.0.6"
+}
