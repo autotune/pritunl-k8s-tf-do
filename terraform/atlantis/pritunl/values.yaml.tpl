@@ -26,7 +26,7 @@ replicaCount: 3
 # Be sure to add the appropriate domain name, cert ARN, and ssl-negotiation-policy (a default is used here).
 service:
   annotations:
-  type: ClusterIp 
+  type: ClusterIP
 
 tty:
   enabled: true
