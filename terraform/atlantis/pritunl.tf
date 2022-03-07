@@ -15,5 +15,5 @@ resource "helm_release" "pritunl" {
   namespace  = "pritunl"
   version    = "0.0.1" 
 
-  raw_values = "${path.module}/pritunl/values.yaml.tpl"
+  values = [ file("${path.module}/pritunl/values.yaml.tpl") ]
 }
