@@ -58,3 +58,7 @@ variable "mongodb_version" {
   type = string
   default = "11.0.6"
 }
+
+variable "package_registry_pat" {
+  type = string
+}
