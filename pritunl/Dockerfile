@@ -1,13 +1,12 @@
 FROM ubuntu:20.04
 
-RUN apt update -q &&\
+RUN apt update -q 
     
-RUN echo "deb http://repo.pritunl.com/stable/apt focal main" | sudo tee /etc/apt/sources.list.d/pritunl.list
+RUN echo "deb http://repo.pritunl.com/stable/apt focal main" | tee /etc/apt/sources.list.d/pritunl.list
 
 RUN apt --assume-yes install pritunl
 
-RUN echo 'deb http://repo.pritunl.com/stable/apt xenial main' >> /etc/apt/sources.list.d/pritunl.list &&\
-    apt update -q &&\
+RUN apt update -q &&\
     apt -y install apt-transport-https &&\
     apt update -q &&\
     apt install -y locales &&\
