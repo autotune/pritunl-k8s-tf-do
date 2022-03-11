@@ -1,8 +1,7 @@
 resource "kubernetes_secret" "docker_login_secret" {
-  for_each = toset(var.domain_name)
   metadata {
-    name      = "${replace(each.key, ".", "-")}-docker-login"
-    namespace = "oauth-proxy"
+    name      = "${replace(var.domain_name, ".", "-")}-docker-login"
+    namespace = "pritunl"
   }
 
   data = {
