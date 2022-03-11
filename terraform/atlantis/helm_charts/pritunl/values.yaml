@@ -3,7 +3,7 @@ image:
   repository: eb129/pritunl
   tag: latest
   pullPolicy: Always
-  pullSecrets: ${domain_name}-docker-tls
+  pullSecret: "${DOMAIN_NAME}-docker-tls"
 
 # This should match whatever the 'mongodb' service is called in the cluster.
 # DNS should be able to resolve the service by this name for Pritunl to function.
