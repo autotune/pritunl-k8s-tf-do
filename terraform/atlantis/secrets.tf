@@ -5,7 +5,7 @@ resource "kubernetes_secret" "docker_login_secret" {
   }
 
   data = {
-      dockerconfigjson = sensitive(data.template_file.docker_registry.rendered)
+      dockerconfigjson = base64encode(sensitive(data.template_file.docker_registry.rendered))
   }
 
   type = "kubernetes.io/opaque"
