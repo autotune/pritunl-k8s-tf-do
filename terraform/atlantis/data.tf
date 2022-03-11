@@ -4,6 +4,10 @@ data "template_file" "pritunl" {
 
 data "template_file" "docker_registry" {
   template = "${path.module}/docker/values.yaml.tpl"
+
+  vars ={ 
+    docker_secret_encoded = local.docker_secret_encoded      
+  }
 }
 
 data "digitalocean_kubernetes_cluster" "k8s" {

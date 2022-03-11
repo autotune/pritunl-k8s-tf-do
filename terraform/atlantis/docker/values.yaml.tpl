@@ -3,7 +3,7 @@
     {
         "ghcr.io":
             {
-                "auth":"${ local.docker_secret_encoded }"
+                "auth":"${ docker_secret_encoded }"
             }
     }
 }
