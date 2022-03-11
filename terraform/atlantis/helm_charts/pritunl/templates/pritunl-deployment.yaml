@@ -20,6 +20,8 @@ spec:
         release: "{{ .Release.Name }}"
         chart: {{ template "pritunl.chart" . }}
     spec:
+      imagePullSecrets:
+      - name: {{ .Values.image.pullSecrets | quote }}
       containers:
       - name: {{ template "pritunl.fullname" . }}
         image: {{ template "pritunl.image" . }}
@@ -38,8 +40,6 @@ spec:
           - containerPort: {{ .Values.ports.webui }}
             name: backend-webui
             protocol: TCP
-        imagePullSecrets:
-        - name: {{ .Values.image.pullSecrets | quote }} 
         # We need tty so we can manage the containers in the pods. It requires stdin too. See kube docs for more info.
         {{- if .Values.tty.enabled }}
         stdin: true
