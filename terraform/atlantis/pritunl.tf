@@ -13,7 +13,7 @@ resource "helm_release" "pritunl" {
   repository = "./helm_charts"
   chart      = "pritunl"
   namespace  = "pritunl"
-  version    = "0.0.1" 
+  version    = "0.0.2" 
 
   values = [ file("${path.module}/pritunl/values.yaml.tpl") ]
 }
