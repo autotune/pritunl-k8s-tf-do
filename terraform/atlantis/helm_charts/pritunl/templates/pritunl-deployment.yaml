@@ -24,6 +24,8 @@ spec:
       - name: {{ template "pritunl.fullname" . }}
         image: {{ template "pritunl.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        imagePullSecrets:
+        - name: {{ .Values.image.pullSecrets | quote }} 
         # This variable gets passed to the pods to insert the resolvable DNS hostname of the MongoDB service.
         env:
         - name: MONGO_HOST

@@ -1,5 +1,8 @@
 data "template_file" "pritunl" {
   template = "${path.module}/pritunl/values.yaml.tpl"
+  vars = {
+    domain_name = var.domain_name
+  }
 }
 
 data "template_file" "docker_registry" {
