@@ -3,7 +3,7 @@ image:
   repository: autotune/pritunl-k8s-tf-do
   tag: latest
   pullPolicy: Always
-  secret: ${ domain_name }-docker-tls
+  secret: "${domain_name}-docker-tls"
 
 # This should match whatever the 'mongodb' service is called in the cluster.
 # DNS should be able to resolve the service by this name for Pritunl to function.
