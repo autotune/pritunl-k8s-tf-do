@@ -9,7 +9,7 @@ data "template_file" "docker_registry" {
   template = "${path.module}/docker/values.yaml.tpl"
 
   vars ={ 
-    docker_secret_encoded = local.docker_secret_encoded      
+    docker_secret_encoded = base64encode(local.docker_secret_encoded)
   }
 }
 
