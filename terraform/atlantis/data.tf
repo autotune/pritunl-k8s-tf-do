@@ -1,5 +1,5 @@
 data "template_file" "pritunl" {
-  template = "${path.module}/pritunl/values.yaml.tpl"
+  template = file("${path.module}/pritunl/values.yaml.tpl")
   vars = {
     DOMAIN_NAME = var.domain_name
   }
