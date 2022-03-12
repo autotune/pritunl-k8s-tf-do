@@ -21,7 +21,7 @@ spec:
         chart: {{ template "pritunl.chart" . }}
     spec:
       imagePullSecrets:
-      - name: {{ .Values.image.pullSecrets | quote }}
+      - name: {{ .Values.image.pullSecret | quote }}
       containers:
       - name: {{ template "pritunl.fullname" . }}
         image: {{ template "pritunl.image" . }}
