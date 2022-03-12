@@ -1,6 +1,6 @@
 image:
-  registry: docker.io
-  repository: eb129/pritunl
+  registry: ${DOCKER_REGISTRY} 
+  repository: ${DOCKER_REPOSITORY}
   tag: latest
   pullPolicy: Always
   pullSecret: "${DOMAIN_NAME}-docker-tls"
