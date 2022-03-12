@@ -1,7 +1,7 @@
 data "template_file" "pritunl" {
   template = file("${path.module}/pritunl/values.yaml.tpl")
   vars = {
-    DOMAIN_NAME = var.domain_name
+    DOMAIN_NAME = ${replace(var.domain_name, ".", "-")}
   }
 }
 
