@@ -37,7 +37,7 @@ variable "do_k8s_pool_name" {
 variable "do_k8s_nodes" {
   description = "Digital Ocean Kubernetes default node pool size (e.g. `2`)"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "do_k8s_node_type" {
