@@ -1,7 +1,7 @@
 image:
   registry: docker.pkg.github.com
-  repository: autotune/pritunl-k8s-tf-do
-  tag: pritunl:a9661a1a 
+  repository: autotune/pritunl-k8s-tf-do/pritunl
+  tag: a9661a1a 
   pullPolicy: Always
   pullSecret: "${DOMAIN_NAME}-docker-login"
 
