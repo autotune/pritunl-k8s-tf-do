@@ -4,7 +4,7 @@ resource "kubernetes_secret" "docker_login_secret" {
     namespace = "pritunl"
   }
 
-  stringdata = {
+  data = {
       ".dockerconfigjson" = base64encode(sensitive(data.template_file.docker_registry.rendered))
   }
 
