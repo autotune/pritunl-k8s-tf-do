@@ -5,7 +5,7 @@ resource "kubernetes_secret" "docker_login_secret" {
   }
 
   data = {
-      ".dockerconfigjson": "${data.template_file.docker_registry.rendered}"
+      ".dockerconfigjson": "${jsonencode(data.template_file.docker_registry.rendered)}"
   }
 
   type = "kubernetes.io/dockerconfigjson" 
