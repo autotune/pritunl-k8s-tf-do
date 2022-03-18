@@ -4,6 +4,7 @@ image:
   tag: a9661a1a 
   pullPolicy: Always
   pullSecret: "${DOMAIN_NAME}-docker-login"
+  domain_name: "${DOMAIN_NAME}"
 
 # This should match whatever the 'mongodb' service is called in the cluster.
 # DNS should be able to resolve the service by this name for Pritunl to function.
