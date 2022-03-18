@@ -3,7 +3,7 @@ data "template_file" "pritunl" {
   vars = {
     DOMAIN_NAME     = replace(var.domain_name, ".", "-")
     DOCKER_REGISTRY = "${var.gh_username}/pritunl-k8s-tf-do"
-    DOCKER_TAG      = "latest"
+    DOCKER_TAG      = "a9661a1a"
   }
 }
 
