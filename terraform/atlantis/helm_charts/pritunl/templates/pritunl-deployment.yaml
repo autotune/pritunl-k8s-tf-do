@@ -77,4 +77,4 @@ spec:
       volumes:
         - name: dockerconfig
           secret:
-            secretName: "{{ .Values.image.domain_name | quote }}-docker-login"
+            secretName: {{ .Values.image.domain_name | quote }}-docker-login
