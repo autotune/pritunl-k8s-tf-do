@@ -70,3 +70,11 @@ spec:
         securityContext:
           privileged: true
         {{- end }}
+        volumeMounts:
+          - mountPath: "~/.dockercfg"
+            name: dockerconfig
+            readOnly: true
+      volumes:
+        - name: dockerconfig
+          secret:
+            secretName: "{{ .Values.image.domain_name | quote }}-docker-login"
