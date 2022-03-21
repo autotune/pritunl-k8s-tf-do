@@ -1,5 +1,5 @@
 image:
-  registry: ghcr.io  
+  registry: docker.pkg.github.com  
   repository: autotune/pritunl-k8s-tf-do/pritunl
   tag: ${DOCKER_TAG} 
   pullPolicy: Always
