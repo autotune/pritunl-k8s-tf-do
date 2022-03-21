@@ -5,7 +5,7 @@ locals {
   docker-credentials = {
     auths = {
       "ghcr.io" = {
-        auth = base64encode("${var.GH_USERNAME}:${var.package_registry_pat}")
+        auth = base64encode("${var.gh_username}:${var.package_registry_pat}")
       }
     }
   }
