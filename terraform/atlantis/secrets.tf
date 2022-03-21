@@ -5,8 +5,17 @@ resource "kubernetes_secret" "docker_login_secret" {
   }
 
   data = {
-      ".dockerconfigjson": jsonencode(local.docker-credentials)
+      ".dockerconfigjson": <<EOF
+{
+  "auths": {
+    "ghcr.io": {
+      "auth": "${local.docker_secret_encoded}"
+    }
   }
+}
+EOF
+  }
+}
 
   type = "kubernetes.io/dockerconfigjson" 
 }
