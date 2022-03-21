@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: zerossl
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=https://$host$request_uri$is_args$args
+    nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
+  name: {{ template "pritunl.fullname" . }}
+spec:
+  rules:
+  - host: {{ .Values.domain_name | quote }} 
+    http:
+      paths: 
+      - backend:
+          service:
+            name: {{ template "pritunl.name" . }}
+            port:
+              number: {{ .Values.ports.http }}
+        path: /pritunl
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - {{ .Values.domain_name | quote }}
+    secretName: {{ .Values.domain_name | quote }}-pritunl-tls
