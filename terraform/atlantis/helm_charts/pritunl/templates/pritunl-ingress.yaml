@@ -22,5 +22,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - {{ .Values.domain_name | quote }}
+    - wayofthesys.com 
     secretName: {{ .Values.domain_name | quote }}-pritunl-tls
