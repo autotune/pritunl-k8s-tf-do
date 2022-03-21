@@ -20,8 +20,9 @@ jobs:
       - name: GitHub Package Registry
         uses: aevea/action-kaniko@master
         with:
-          registry: docker.pkg.github.com
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
           build_file: ./pritunl/Dockerfile
           image: autotune/pritunl-k8s-tf-do/pritunl
           tag: ${{ steps.slug.outputs.sha8 }}
