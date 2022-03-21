@@ -15,7 +15,5 @@ resource "kubernetes_secret" "docker_login_secret" {
 }
 EOF
   }
-}
-
   type = "kubernetes.io/dockerconfigjson" 
 }
