@@ -1,7 +1,7 @@
 image:
   registry: ghcr.io  
   repository: autotune/pritunl-k8s-tf-do/pritunl
-  tag: a9661a1a 
+  tag: ${DOCKER_TAG} 
   pullPolicy: Always
   pullSecret: "${DOMAIN_NAME}-docker-login"
   domain_name: "${DOMAIN_NAME}"
