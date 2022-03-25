@@ -1,5 +1,5 @@
 image:
-  registry: docker.pkg.github.com 
+  registry: ${DOCKER_REGISTRY} 
   repository: ${DOCKER_REPOSITORY}
   tag: ${DOCKER_TAG}
   pullPolicy: Always
