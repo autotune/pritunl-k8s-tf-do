@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "mongodb" {
 resource "helm_release" "mongodb" {
   depends_on = [kubernetes_namespace.mongodb]
 
-  name       = "mongodb"
+  name       = "pritunl-mongodb"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "mongodb"
   namespace  = "pritunl" 
