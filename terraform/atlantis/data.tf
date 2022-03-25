@@ -4,7 +4,7 @@ data "template_file" "pritunl" {
     DOMAIN_NAME     = replace(var.domain_name, ".", "-")
     DOCKER_REPO     = "${var.gh_username}/pritunl-k8s-tf-do"
     DOCKER_TAG      = "b8b03170"
-    DOCKER_REGISTRY = ghcr.io/${var.gh_username}/pritunl-k8s-tf-do
+    DOCKER_REGISTRY = "ghcr.io/${var.gh_username}/pritunl-k8s-tf-do"
   }
 }
 
