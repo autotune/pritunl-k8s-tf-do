@@ -56,7 +56,7 @@ variable "domain_name" {
 
 variable "mongodb_version" {
   type = string
-  default = "11.0.6"
+  default = "11.1.1"
 }
 
 variable "package_registry_pat" {
