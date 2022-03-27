@@ -8,7 +8,7 @@ resource "helm_release" "common" {
 
   name       = "bitnami-common"
   repository = "https://charts.bitnami.com/bitnami"
-  chart      = "bitnami-common"
+  chart      = "common"
   namespace  = "pritunl" 
   version    = "1.11.3" 
 
