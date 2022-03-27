@@ -17,7 +17,7 @@ data "template_file" "docker_registry" {
 }
 
 data "template_file" "mongodb" {
-  template = "${path.module}/mongodb/values.yaml.tpl"
+  template = file("${path.module}/mongodb/values.yaml.tpl")
 
   vars ={ 
     ROOTPASSWORD = var.mongodb_root_password

@@ -15,6 +15,5 @@ resource "helm_release" "pritunl" {
   namespace  = "pritunl"
   version    = "0.0.4" 
 
-  # values = [ file("${path.module}/pritunl/values.yaml.tpl") ]
   values = [ data.template_file.pritunl.rendered ]
 }
