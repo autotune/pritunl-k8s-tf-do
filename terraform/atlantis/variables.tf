@@ -67,7 +67,7 @@ variable "gh_username" {
   type = string
 }
 
-variable "mongodb_root_password"
+variable "mongodb_root_password" {
   type = string 
   default = "IJfedsdaHHffhd323a"
 }
