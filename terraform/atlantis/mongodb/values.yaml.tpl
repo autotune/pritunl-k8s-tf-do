@@ -1,2 +1,5 @@
-# auth:
-#   rootPassword: ${ROOTPASSWORD}
+auth:
+  rootPassword: ${ROOTPASSWORD}
+
+image:
+  repository: bitnami/mongodb
