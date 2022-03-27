@@ -4,14 +4,6 @@ resource "kubernetes_namespace" "mongodb" {
   }
 }
 
-resource "helm_release" "common" {
-
-  name       = "bitnami-common"
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "common"
-  namespace  = "pritunl" 
-  version    = "1.11.3" 
-}
 
 resource "helm_release" "mongodb" {
   depends_on = [helm_release.common]
