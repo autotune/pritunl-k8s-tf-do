@@ -1,0 +1,1 @@
+auth.rootPassword=${ROOTPASSWORD}
