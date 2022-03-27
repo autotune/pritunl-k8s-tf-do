@@ -38,5 +38,5 @@ Return the proper image name
 {{- $registryName :=  .Values.image.registry -}}
 {{- $repositoryName := .Values.image.repository -}}
 {{- $tag := .Values.image.tag | toString -}}
-{{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- printf "%s/%s/%s" $registryName $repositoryName $tag -}}
 {{- end -}}
