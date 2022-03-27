@@ -10,7 +10,7 @@ resource "helm_release" "common" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "bitnami-common"
   namespace  = "pritunl" 
-  version    = "1.0.0" 
+  version    = "1.11.3" 
 
   values   = [ sensitive(data.template_file.mongodb.rendered) ] 
 }
