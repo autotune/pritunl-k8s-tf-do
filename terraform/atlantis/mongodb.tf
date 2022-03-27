@@ -14,4 +14,9 @@ resource "helm_release" "mongodb" {
   version    = var.mongodb_version
 
   # values   = [ sensitive(data.template_file.mongodb.rendered) ] 
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x mongodb/create_user.sh",
+      "mongodb/create_user.sh",
+    ]
 }
