@@ -66,3 +66,8 @@ variable "package_registry_pat" {
 variable "gh_username" {
   type = string
 }
+
+variable "mongodb_root_password"
+  type = string 
+  default = "IJfedsdaHHffhd323a"
+}

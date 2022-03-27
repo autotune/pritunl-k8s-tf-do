@@ -13,10 +13,5 @@ resource "helm_release" "mongodb" {
   namespace  = "pritunl" 
   version    = var.mongodb_version
 
-  # values   = [ sensitive(data.template_file.mongodb.rendered) ] 
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x mongodb/create_user.sh",
-      "mongodb/create_user.sh",
-    ]
+  values   = [ sensitive(data.template_file.mongodb.rendered) ] 
 }
