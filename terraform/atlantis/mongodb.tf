@@ -11,8 +11,6 @@ resource "helm_release" "common" {
   chart      = "common"
   namespace  = "pritunl" 
   version    = "1.11.3" 
-
-  values   = [ sensitive(data.template_file.mongodb.rendered) ] 
 }
 
 resource "helm_release" "mongodb" {
