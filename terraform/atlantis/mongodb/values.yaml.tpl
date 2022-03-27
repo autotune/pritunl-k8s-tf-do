@@ -1,2 +1,2 @@
-auth:
-  rootPassword: ${ROOTPASSWORD}
+# auth:
+#   rootPassword: ${ROOTPASSWORD}
