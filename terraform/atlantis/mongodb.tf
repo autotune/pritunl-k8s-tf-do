@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "mongodb" {
 
 resource "helm_release" "mongodb" {
   name       = "pritunl-mongodb"
-  repository = "./helm-charts"
+  repository = "./helm_charts"
   chart      = "mongodb"
   namespace  = "pritunl" 
   version    = var.mongodb_version
