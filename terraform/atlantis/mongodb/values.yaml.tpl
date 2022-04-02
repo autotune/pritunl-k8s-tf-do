@@ -1,3 +1,4 @@
 auth:
-  rootPassword: ${ROOTPASSWORD}
-  mongodbRootPassword: ${ROOTPASSWORD}
+  usernames: ["admin"]
+  passwords: ["${ROOTPASSWORD}"]
+  databases:["pritunl"] 
