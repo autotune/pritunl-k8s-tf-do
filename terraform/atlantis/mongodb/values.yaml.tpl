@@ -1,4 +1,4 @@
 auth:
-  usernames: ["admin"]
-  passwords: ["${ROOTPASSWORD}"]
-  databases:["pritunl"] 
+  username: "admin"
+  password: "${ROOTPASSWORD}"
+  database:"pritunl" 
