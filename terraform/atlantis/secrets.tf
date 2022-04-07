@@ -17,3 +17,16 @@ EOF
   }
   type = "kubernetes.io/dockerconfigjson" 
 }
+
+resource "kubernetes_secret" "mongodb_root_password" {
+  metadata {
+    name = "mongodb_root_password"
+  }
+
+  data = {
+    MONGODB_ROOT_PASSWORD = var.mongodb_root_password
+  }
+
+  type = "kubernetes.io/Opaque"
+}
+
