@@ -63,3 +63,6 @@ variable "package_registry_pat" {
   type = string
 }
 
+variable "mongodb_root_password" {
+  type = string
+}
