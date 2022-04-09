@@ -69,6 +69,7 @@ resource "tls_cert_request" "request" {
     digitalocean_loadbalancer.ingress_load_balancer.ip,
     "138.197.48.247",
     "167.71.191.233",
+    "10.0.0.0/16"
   ]
 
   subject {
