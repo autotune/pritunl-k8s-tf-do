@@ -72,7 +72,7 @@ resource "tls_cert_request" "request" {
   ]
 
   subject {
-    common_name  = var.domain_name[0]
+    common_name  = "terraform.${var.domain_name[0]}"
     organization = "Atlantis"
   }
 }
