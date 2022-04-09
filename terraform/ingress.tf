@@ -57,7 +57,7 @@ resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["${tls.value}"]
+        hosts = ["terraform.${tls.value}"]
       }
     }
   }
@@ -99,7 +99,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["${tls.value}"]
+        hosts = ["terraform.${tls.value}"]
       }
     }
   }
@@ -139,7 +139,7 @@ resource "kubernetes_ingress" "oauth2_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["${tls.value}"]
+        hosts = ["terraform.${tls.value}"]
       }
     }
   }

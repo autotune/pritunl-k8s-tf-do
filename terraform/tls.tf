@@ -61,6 +61,7 @@ resource "tls_cert_request" "request" {
     "atlantis.default.svc.cluster.local",
     "localhost",
     "${var.domain_name[0]}",
+    "terraform.${var.domain_name[0]}",
   ]
 
   ip_addresses = [
