@@ -41,7 +41,7 @@ resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${rule.value}"
+        host = "terraform.${rule.value}"
         http {
           path {
             backend {
@@ -83,7 +83,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${rule.value}"
+        host = "terraform.${rule.value}"
         http {
           path {
             backend {
@@ -123,7 +123,7 @@ resource "kubernetes_ingress" "oauth2_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${rule.value}"
+        host = "terraform.${rule.value}"
         http {
           path {
             backend {
