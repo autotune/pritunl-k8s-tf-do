@@ -55,23 +55,6 @@ resource "tls_cert_request" "request" {
   key_algorithm   = tls_private_key.key.algorithm
   private_key_pem = tls_private_key.key.private_key_pem
 
-  dns_names = [
-    "atlantis",
-    "atlantis.local",
-    "atlantis.default.svc.cluster.local",
-    "localhost",
-    "${var.domain_name[0]}",
-    "terraform.${var.domain_name[0]}",
-  ]
-
-  ip_addresses = [
-    "127.0.0.1",
-    digitalocean_loadbalancer.ingress_load_balancer.ip,
-    "138.197.48.247",
-    "167.71.191.233",
-    "10.0.0.0/16"
-  ]
-
   subject {
     common_name  = "terraform.${var.domain_name[0]}"
     organization = "Atlantis"
