@@ -17,7 +17,7 @@ resource "github_repository_webhook" "hook" {
   for_each   = toset(var.domain_name)
 
   configuration {
-    url          = "https://${each.value}/events"
+    url          = "https://terraform.${each.value}/events"
     content_type = "application/json"
     insecure_ssl = false  
     secret       = random_id.webhook.hex
