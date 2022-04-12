@@ -73,7 +73,7 @@ resource "kubernetes_deployment" "atlantis_deployment" {
           }
 
           env {
-            name  = "TF_VAR_MONGODB_ROOT_PASSWORD"
+            name  = "TF_VAR_mongodb_root_password"
             value = var.mongodb_root_password
           }
 
