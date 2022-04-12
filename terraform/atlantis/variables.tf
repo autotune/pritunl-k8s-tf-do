@@ -71,7 +71,3 @@ variable "mongodb_root_password" {
   type = string 
 }
 
-variable "foo" {
-  type = string
-  default = "bar"
-}
