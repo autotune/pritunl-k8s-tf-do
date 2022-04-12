@@ -73,6 +73,11 @@ resource "kubernetes_deployment" "atlantis_deployment" {
           }
 
           env {
+            name  = "MONGODB_ROOT_PASSWORD"
+            value = var.mongodb_root_password
+          }
+
+          env {
             name  = "ATLANTIS_GH_USER"
             value = var.atlantis_github_user
           }
