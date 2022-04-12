@@ -1,4 +1,4 @@
-/* resource "kubernetes_secret" "tls" {
+resource "kubernetes_secret" "tls" {
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-atlantis-tls"
     namespace = "atlantis"
@@ -82,4 +82,3 @@ resource "tls_locally_signed_cert" "cert" {
     command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca.cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
   }
 }
-*/
