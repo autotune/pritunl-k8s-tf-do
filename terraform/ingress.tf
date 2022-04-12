@@ -14,7 +14,7 @@ resource "helm_release" "nginx_ingress_chart" {
   }
   set {
     name  = "service.beta.kubernetes.io/do-loadbalancer-hostname"
-    value = var.domain_name[0]
+    value = "terraform.${var.domain_name[0]}"
   }
 
   depends_on = [
