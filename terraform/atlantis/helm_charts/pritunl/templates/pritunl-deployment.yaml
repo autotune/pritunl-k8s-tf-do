@@ -28,11 +28,11 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         # This variable gets passed to the pods to insert the resolvable DNS hostname of the MongoDB service.
         env:
-       - name: MONGODB_ROOT_PASSWORD
-         valueFrom: 
-           secretKeyRef: 
-             name: mongodb-root-password 
-             key: MONGODB_ROOT_PASSWORD
+        - name: MONGODB_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef: 
+              name: mongodb-root-password 
+              key: MONGODB_ROOT_PASSWORD
         - name: MONGO_HOST
           value: {{ .Values.mongoService }}
         ports:
