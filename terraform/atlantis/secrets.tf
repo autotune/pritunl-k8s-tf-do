@@ -20,7 +20,8 @@ EOF
 
 resource "kubernetes_secret" "mongodb_root_password" {
   metadata {
-    name = "mongodb-root-password"
+    name      = "mongodb-root-password"
+    namespace = "pritunl"
   }
 
   data = {
