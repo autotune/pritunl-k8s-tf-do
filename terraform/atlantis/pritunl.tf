@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "pritunl" {
 }
 
 resource "helm_release" "pritunl" {
-  depends_on = [kubernetes_namespace.pritunl, helm_release.mongodb, kubernetes_secret.docker_login_secret]
+  depends_on = [kubernetes_namespace.pritunl, helm_release.mongodb, kubernetes_secret.docker_login_secret, kubernetes_secret.mongodb_root_password]
 
   name       = "pritunl"
   repository = "./helm_charts"
