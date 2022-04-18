@@ -10,10 +10,6 @@ resource "kubernetes_secret" "tls" {
   }
 }
 
-resource "random_id" "encryption-key" {
-  byte_length = "32"
-}
-
 resource "tls_private_key" "ca" {
   algorithm = "RSA"
   rsa_bits  = "2048"
