@@ -13,7 +13,7 @@ resource "helm_release" "pritunl" {
   repository = "./helm_charts"
   chart      = "pritunl"
   namespace  = "pritunl"
-  version    = "0.0.6" 
+  version    = "0.0.7" 
 
   values = [ data.template_file.pritunl.rendered ]
 }

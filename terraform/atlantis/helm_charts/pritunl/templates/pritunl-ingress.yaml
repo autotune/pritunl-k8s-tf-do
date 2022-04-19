@@ -10,7 +10,7 @@ metadata:
   name: {{ template "pritunl.fullname" . }}
 spec:
   rules:
-  - host: wayofthesys.com
+  - host: pritunl.wayofthesys.com
     http:
       paths: 
       - backend:
@@ -22,5 +22,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - wayofthesys.com 
+    - pritunl.wayofthesys.com 
     secretName: wayofthesys-com-pritunl-tls

@@ -70,7 +70,7 @@ resource "tls_cert_request" "request" {
   ]
 
   subject {
-    common_name  = "argocd.${var.domain_name}"
+    common_name  = "pritunl.${var.domain_name}"
     organization = "Atlantis"
   }
 }
