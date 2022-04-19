@@ -15,9 +15,9 @@ pritunldb = client["pritunl"]
 
 listing = pritunldb.command('usersInfo')['users'][0]['user']
 
-if 'admin' not in listing:
-    print('admin user not found, creating admin user')
-    pritunldb.command("createUser", "admin", pwd="{}".format(mongodb_root_password), roles=["readWrite"])
+if 'pritunl' not in listing:
+    print('pritunl user not found, creating admin user')
+    pritunldb.command("createUser", "pritunl", pwd="{}".format(mongodb_root_password), roles=["readWrite"])
 else:
-    print('admin user found, exiting!')
+    print('pritunl user found, exiting!')
     exit
