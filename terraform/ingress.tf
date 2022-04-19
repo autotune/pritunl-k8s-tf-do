@@ -14,7 +14,7 @@ resource "helm_release" "nginx_ingress_chart" {
   }
   set {
     name  = "service.beta.kubernetes.io/do-loadbalancer-hostname"
-    value = var.domain_name[0]
+    value = "terraform.${var.domain_name[0]}"
   }
 
   depends_on = [
@@ -41,7 +41,7 @@ resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${rule.value}"
+        host = "terraform.${rule.value}"
         http {
           path {
             backend {
@@ -57,7 +57,7 @@ resource "kubernetes_ingress" "atlantis_events_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["${tls.value}"]
+        hosts = ["terraform.${tls.value}"]
       }
     }
   }
@@ -83,7 +83,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${rule.value}"
+        host = "terraform.${rule.value}"
         http {
           path {
             backend {
@@ -99,7 +99,7 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["${tls.value}"]
+        hosts = ["terraform.${tls.value}"]
       }
     }
   }
@@ -123,7 +123,7 @@ resource "kubernetes_ingress" "oauth2_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.domain_name)
       content {
-        host = "${rule.value}"
+        host = "terraform.${rule.value}"
         http {
           path {
             backend {
@@ -139,7 +139,7 @@ resource "kubernetes_ingress" "oauth2_cluster_ingress" {
       for_each = toset(var.domain_name)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["${tls.value}"]
+        hosts = ["terraform.${tls.value}"]
       }
     }
   }

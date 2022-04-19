@@ -10,10 +10,6 @@ resource "kubernetes_secret" "tls" {
   }
 }
 
-resource "random_id" "encryption-key" {
-  byte_length = "32"
-}
-
 resource "tls_private_key" "ca" {
   algorithm = "RSA"
   rsa_bits  = "2048"
@@ -55,21 +51,8 @@ resource "tls_cert_request" "request" {
   key_algorithm   = tls_private_key.key.algorithm
   private_key_pem = tls_private_key.key.private_key_pem
 
-  dns_names = [
-    "atlantis",
-    "atlantis.local",
-    "atlantis.default.svc.cluster.local",
-    "localhost",
-    "${var.domain_name[0]}",
-  ]
-
-  ip_addresses = [
-    "127.0.0.1",
-    digitalocean_loadbalancer.ingress_load_balancer.ip,
-  ]
-
   subject {
-    common_name  = var.domain_name[0]
+    common_name  = "terraform.${var.domain_name[0]}"
     organization = "Atlantis"
   }
 }

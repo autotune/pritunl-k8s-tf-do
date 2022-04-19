@@ -73,6 +73,11 @@ resource "kubernetes_deployment" "atlantis_deployment" {
           }
 
           env {
+            name  = "TF_VAR_mongodb_root_password"
+            value = var.mongodb_root_password
+          }
+
+          env {
             name  = "ATLANTIS_GH_USER"
             value = var.atlantis_github_user
           }
@@ -130,6 +135,16 @@ resource "kubernetes_deployment" "atlantis_deployment" {
            env {
             name  = "TF_VAR_domain_name"
             value = var.domain_name[0]
+           }
+
+           env {
+            name  = "TF_VAR_gh_username"
+            value = var.gh_username
+           }
+
+           env {
+            name  = "TF_VAR_package_registry_pat"
+            value = var.package_registry_pat
            }
 
           resources {

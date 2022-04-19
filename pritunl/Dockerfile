@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 
 RUN apt update -q &&\
-    apt -y install gnupg2 
+    apt -y install gnupg2 python3-pymongo vim 
    
 RUN echo "deb [trusted=yes] http://repo.pritunl.com/stable/apt focal main" | tee /etc/apt/sources.list.d/pritunl.list
 
@@ -27,6 +27,7 @@ RUN apt update -q &&\
     apt -y -q autoremove
 
 ADD start_pritunl /tmp
+ADD mongo_add_user.py /tmp 
 
 EXPOSE 80 443 1194
 

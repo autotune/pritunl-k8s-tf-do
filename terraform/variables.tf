@@ -37,7 +37,7 @@ variable "do_k8s_pool_name" {
 variable "do_k8s_nodes" {
   description = "Digital Ocean Kubernetes default node pool size (e.g. `2`)"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "do_k8s_node_type" {
@@ -131,6 +131,18 @@ variable "aws_access_key_id" {
 }
 
 variable "aws_secret_access_key" {
+  type = string
+}
+
+variable "package_registry_pat" {
+  type = string
+}
+
+variable "gh_username" {
+  type = string
+} 
+
+variable "mongodb_root_password" {
   type = string
 }
 
