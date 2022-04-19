@@ -14,7 +14,7 @@ mongoService: "pritunl-mongodb"
 ports:
   http: 80
   vpn: 1194
-  webui: 443
+  webui: 80 
 
 # This must be enabled when using Pritunl due to the rights that iptables will need in the Pritunl pods.
 privileged:
