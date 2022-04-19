@@ -23,7 +23,7 @@ resource "helm_release" "oauth2_proxy" {
   ]
 }
 
-resource "kubernetes_deployment" "atlantis_deployments" {
+resource "kubernetes_deployment" "atlantis_deployment" {
 
   depends_on = [digitalocean_kubernetes_cluster.k8s, kubernetes_namespace.oauth_proxy]
 
@@ -107,10 +107,35 @@ resource "kubernetes_deployment" "atlantis_deployments" {
             value = var.aws_secret_access_key 
            } 
 
+           env {
+            name  = "TF_VAR_do_token"
+            value = var.do_token
+           }
+
+           env { 
+            name  = "TF_VAR_oauth_client_id"
+            value = var.oauth_client_id
+           }
+
+           env { 
+            name  = "TF_VAR_oauth_client_secret"
+            value = var.oauth_client_secret
+           }
+
+           env { 
+            name  = "TF_VAR_argocd_server_host"
+            value = "argocd.${var.domain_name[0]}"
+           }
+
+           env {
+            name  = "TF_VAR_domain_name"
+            value = var.domain_name[0]
+           }
+
           resources {
             limits = {
-              memory = "512M"
-              cpu = "1"
+              memory = "1024M"
+              cpu = "2"
             }
             requests = {
               memory = "256M"
