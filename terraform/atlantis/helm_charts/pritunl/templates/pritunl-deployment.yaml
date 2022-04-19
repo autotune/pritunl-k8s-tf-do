@@ -23,7 +23,7 @@ spec:
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret | quote }}
       initContainers:
-      - name: {{ template "pritunl.fullname" . }}
+      - name: {{ template "pritunl.fullname" . }}-init
         image: {{ template "pritunl.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         command: ["python3", "/tmp/mongo_add_user.py"]
