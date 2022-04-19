@@ -13,10 +13,15 @@ client = MongoClient("pritunl-mongodb:27017",
                       
 pritunldb = client["pritunl"]
 
-listing = pritunldb.command('usersInfo')['users'][0]['user']
+listing = pritunldb.command('usersInfo')['users']
 
-if 'pritunl' not in listing:
-    print('pritunl user not found, creating admin user')
+users = []
+
+for user in range(0, len(listing)):
+    users.append(listing[user]['user'])
+
+if 'pritunl' not in users:
+    print('pritunl user not found, creating pritunl user')
     pritunldb.command("createUser", "pritunl", pwd="{}".format(mongodb_root_password), roles=["readWrite"])
 else:
     print('pritunl user found, exiting!')
