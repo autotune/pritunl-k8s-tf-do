@@ -1,6 +1,3 @@
-
-*.yaml
-
 terraform/kubectl-cert-manager.tar.gz
 
 terraform/LICENSES
