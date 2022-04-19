@@ -22,6 +22,30 @@ spec:
     spec:
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret | quote }}
+      initContainers:
+      - name: {{ template "pritunl.fullname" . }}
+        image: {{ template "pritunl.image" . }}
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        command: ["python3", "/tmp/mongo_add_user.py"]
+        # This variable gets passed to the pods to insert the resolvable DNS hostname of the MongoDB service.
+        env:
+        - name: MONGODB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-root-password
+              key: MONGODB_ROOT_PASSWORD
+        - name: MONGO_HOST
+          value: {{ .Values.mongoService }}
+        ports:
+          - containerPort: {{ .Values.ports.http }}
+            name: backend-http
+            protocol: TCP
+          - containerPort: {{ .Values.ports.vpn }}
+            name: backend-vpn
+            protocol: TCP
+          - containerPort: {{ .Values.ports.webui }}
+            name: backend-webui
+            protocol: TCP
       containers:
       - name: {{ template "pritunl.fullname" . }}
         image: {{ template "pritunl.image" . }}
