@@ -29,7 +29,7 @@ RUN apt update -q &&\
 ADD start_pritunl /tmp
 ADD mongo_add_user.py /tmp 
 
-# RUN ["python3", "/tmp/mongo_add_user.py"] 
+RUN ["python3", "/tmp/mongo_add_user.py"] 
 
 EXPOSE 80 443 1194
 
