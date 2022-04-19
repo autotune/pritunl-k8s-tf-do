@@ -7,6 +7,8 @@ mongodb_host          = environ.get('MONGO_HOST')
 mongodb_port          = environ.get('PRITUNL_MONGODB_SERVICE_PORT_MONGODB')
 mongodb_root_password = environ.get('MONGODB_ROOT_PASSWORD')
 
-client = MongoClient("{}:{:03d}").format(mongodb_host, mongodb_port)  
-client.admin.authenticate('root', '%s')
+client = MongoClient("pritunl-mongo:2107",
+                      username='root',
+                      password='{}'.format(mongodb_root_password))
+
 client.testdb.add_user('newTestUser', 'Test123', roles=[{'role':'readWrite','db':'testdb'}])
