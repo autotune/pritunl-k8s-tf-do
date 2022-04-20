@@ -7,13 +7,13 @@ resource "kubernetes_namespace" "pritunl" {
 }
 
 resource "helm_release" "pritunl" {
-  depends_on = [kubernetes_namespace.pritunl, kubernetes_namespace.mongodb]
+  depends_on = [kubernetes_namespace.pritunl, helm_release.mongodb, kubernetes_secret.docker_login_secret, kubernetes_secret.mongodb_root_password]
 
   name       = "pritunl"
   repository = "./helm_charts"
   chart      = "pritunl"
   namespace  = "pritunl"
-  version    = "0.0.1" 
+  version    = "0.0.8" 
 
-  values = [ file("${path.module}/pritunl/values.yaml.tpl") ]
+  values = [ data.template_file.pritunl.rendered ]
 }
