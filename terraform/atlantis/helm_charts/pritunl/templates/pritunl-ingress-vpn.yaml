@@ -8,17 +8,17 @@ metadata:
   name: {{ template "pritunl.fullname" . }}
 spec:
   rules:
-  - host: pritunl.wayofthesys.com
+  - host: vpn.wayofthesys.com
     http:
       paths: 
       - backend:
           service:
             name: {{ template "pritunl.name" . }}
             port:
-              number: {{ .Values.ports.http }}
+              number: {{ .Values.ports.vpn }}
         path: /
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - pritunl.wayofthesys.com 
+    - vpn.wayofthesys.com 
     secretName: wayofthesys-com-pritunl-tls
