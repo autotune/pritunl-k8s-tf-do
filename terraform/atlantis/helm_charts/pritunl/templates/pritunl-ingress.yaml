@@ -16,6 +16,9 @@ spec:
             name: {{ template "pritunl.name" . }}
             port:
               number: {{ .Values.ports.http }}
+            name: {{ template "pritunl.name" . }}-vpn
+            port:
+              number: {{ .Values.ports.vpn }}
         path: /
         pathType: ImplementationSpecific
   tls:
