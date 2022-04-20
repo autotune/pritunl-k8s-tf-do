@@ -50,3 +50,15 @@ resource "digitalocean_record" "pritunl" {
     kubernetes_ingress.atlantis_cluster_ingress
   ]
 }
+
+resource "digitalocean_record" "vpn" {
+  for_each = toset(var.domain_name)
+  domain = each.value
+  type   = "A"
+  ttl = 60
+  name   = "vpn"
+  value  = digitalocean_loadbalancer.ingress_load_balancer.ip
+  depends_on = [
+    kubernetes_ingress.atlantis_cluster_ingress
+  ]
+}
