@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "tls" {
   depends_on = [kubernetes_namespace.pritunl]
   metadata {
-    name      = "${replace(var.domain_name, ".", "-")}-terraform-tls"
+    name      = "${replace(var.domain_name, ".", "-")}-pritunl-tls"
     namespace = "pritunl"
   }
 
@@ -9,6 +9,10 @@ resource "kubernetes_secret" "tls" {
     "tls.crt" = tls_locally_signed_cert.cert.cert_pem
     "tls.key" = tls_private_key.key.private_key_pem
   }
+}
+
+resource "random_id" "encryption-key" {
+  byte_length = "32"
 }
 
 resource "tls_private_key" "ca" {
@@ -57,7 +61,7 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "terraform.${var.domain_name}",
+    "pritunl.${var.domain_name}",
   ]
 
   ip_addresses = [
@@ -66,7 +70,7 @@ resource "tls_cert_request" "request" {
   ]
 
   subject {
-    common_name  = "terraform.${var.domain_name}"
+    common_name  = "pritunl.${var.domain_name}"
     organization = "Atlantis"
   }
 }
