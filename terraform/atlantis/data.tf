@@ -1,10 +1,11 @@
 data "template_file" "pritunl" {
   template = file("${path.module}/pritunl/values.yaml.tpl")
   vars = {
-    DOMAIN_NAME     = replace(var.domain_name, ".", "-")
-    DOCKER_REPO     = "${var.gh_username}/pritunl-k8s-tf-do"
-    DOCKER_TAG      = "pritunl:dc7700e4"
-    DOCKER_REGISTRY = "ghcr.io"
+    DOMAIN_NAME         = replace(var.domain_name, ".", "-")
+    DOMAIN_NAME_VERBOSE = var.domain_name
+    DOCKER_REPO         = "${var.gh_username}/pritunl-k8s-tf-do"
+    DOCKER_TAG          = "pritunl:dc7700e4"
+    DOCKER_REGISTRY     = "ghcr.io"
   }
 }
 
