@@ -4,8 +4,8 @@ image:
   tag: ${DOCKER_TAG} 
   pullPolicy: Always
   pullSecret: "${DOMAIN_NAME}-docker-login"
-  domainName: "${DOMAIN_NAME_VERBOSE}"
-  secretName: "${DOMAIN_NAME}-pritunl-tls"
+  domainname: "${DOMAIN_NAME}"
+  secretname: "${DOMAIN_NAME}-pritunl-tls"
 
 # This should match whatever the 'mongodb' service is called in the cluster.
 # DNS should be able to resolve the service by this name for Pritunl to function.
@@ -15,7 +15,7 @@ mongoService: "pritunl-mongodb"
 ports:
   http: 80
   vpn: 1194
-  webui: 80
+  webui: 80 
 
 # This must be enabled when using Pritunl due to the rights that iptables will need in the Pritunl pods.
 privileged:
