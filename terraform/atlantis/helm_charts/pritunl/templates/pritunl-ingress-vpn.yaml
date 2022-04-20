@@ -8,7 +8,7 @@ metadata:
   name: {{ template "pritunl.fullname" . }}
 spec:
   rules:
-  - host: vpn.{{ .Values.image.domainName }}
+  - host: vpn.wayofthesys.com
     http:
       paths: 
       - backend:
@@ -20,5 +20,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
     - hosts:
-      - vpn.{{ .Values.image.domainName }}
-    secretName: {{ .Values.image.secretName }}
+      - vpn.wayofthesys.com
+    secretName: "wayofthesys-com-pritunl-tls"
