@@ -4,14 +4,13 @@ resource "kubernetes_namespace" "mongodb" {
   }
 }
 
-resource "helm_release" "mongodb" {
-  depends_on = [kubernetes_namespace.mongodb]
 
-  name       = "mongodb"
-  repository = "https://charts.bitnami.com/bitnami"
+resource "helm_release" "mongodb" {
+  name       = "pritunl-mongodb"
+  repository = "./helm_charts"
   chart      = "mongodb"
-  namespace  = "mongodb" 
+  namespace  = "pritunl" 
   version    = var.mongodb_version
 
-  # values   = [ sensitive(data.template_file.mongodb.rendered) ] 
+  values   = [ sensitive(data.template_file.mongodb.rendered) ] 
 }

@@ -1,19 +1,28 @@
-/* 
-data "template_file" "argocd" {
-  template = "${path.module}/mongodb/values.yaml.tpl"
+data "template_file" "pritunl" {
+  template = file("${path.module}/pritunl/values.yaml.tpl")
   vars = {
-        argocd_server_host          = "argocd.${var.domain_name}"  
-        argocd_github_client_id     = var.oauth_client_id
-        argocd_github_client_secret = var.oauth_client_secret
-
-        argocd_ingress_enabled                 = var.argocd_ingress_enabled
-        argocd_ingress_tls_acme_enabled        = var.argocd_ingress_tls_acme_enabled
-        argocd_ingress_ssl_passthrough_enabled = var.argocd_ingress_ssl_passthrough_enabled
-        argocd_ingress_class                   = var.argocd_ingress_class
-        argocd_ingress_tls_secret_name         = "${var.domain_name}-argocd-tls"
+    DOMAIN_NAME     = replace(var.domain_name, ".", "-")
+    DOCKER_REPO     = "${var.gh_username}/pritunl-k8s-tf-do"
+    DOCKER_TAG      = "pritunl:dc7700e4"
+    DOCKER_REGISTRY = "ghcr.io"
   }
 }
-*/
+
+data "template_file" "docker_registry" {
+  template = "${path.module}/docker/values.yaml.tpl"
+
+  vars ={ 
+    docker_secret_encoded = local.docker_secret_encoded
+  }
+}
+
+data "template_file" "mongodb" {
+  template = file("${path.module}/mongodb/values.yaml.tpl")
+
+  vars ={ 
+    ROOTPASSWORD = var.mongodb_root_password
+  }
+}
 
 data "digitalocean_kubernetes_cluster" "k8s" {
   name = local.name
