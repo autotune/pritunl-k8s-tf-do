@@ -1,4 +1,4 @@
 name: pritunl 
 description: pritunl
-version: 0.0.1
+version: 0.0.9
 kubeVersion: ">=1.10.0"
