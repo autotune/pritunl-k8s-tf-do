@@ -1,8 +1,10 @@
 image:
-  registry: docker.pkg.github.com
-  repository: autotune/pritunl-k8s-tf-do
-  tag: latest
+  registry: ${DOCKER_REGISTRY}  
+  repository: autotune/pritunl-k8s-tf-do/autotune/pritunl-k8s-tf-do
+  tag: ${DOCKER_TAG} 
   pullPolicy: Always
+  pullSecret: "${DOMAIN_NAME}-docker-login"
+  domain_name: "${DOMAIN_NAME}"
 
 # This should match whatever the 'mongodb' service is called in the cluster.
 # DNS should be able to resolve the service by this name for Pritunl to function.
@@ -12,7 +14,7 @@ mongoService: "pritunl-mongodb"
 ports:
   http: 80
   vpn: 1194
-  webui: 443
+  webui: 80 
 
 # This must be enabled when using Pritunl due to the rights that iptables will need in the Pritunl pods.
 privileged:
