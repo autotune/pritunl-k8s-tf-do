@@ -19,6 +19,6 @@ spec:
         path: /
         pathType: ImplementationSpecific
   tls:
-  - hosts:
-    - vpn.{{ .Values.image.domainName }}
+    - hosts:
+      - vpn.{{ .Values.image.domainName }}
     secretName: {{ .Values.image.secretName }}
