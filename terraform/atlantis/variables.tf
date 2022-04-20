@@ -56,13 +56,18 @@ variable "domain_name" {
 
 variable "mongodb_version" {
   type = string
-  default = "11.1.2"
+  default = "11.1.1"
 }
 
 variable "package_registry_pat" {
   type = string
 }
 
-variable "mongodb_root_password" {
+variable "gh_username" {
   type = string
 }
+
+variable "mongodb_root_password" {
+  type = string 
+}
+
