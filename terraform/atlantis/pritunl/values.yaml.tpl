@@ -28,12 +28,6 @@ privileged:
 # This is '3' by default. Your Pritunl cluster number will be affected by this.
 replicaCount: 3
 
-# If 'type' here is 'LoadBalancer', these annotations are necessary to properly use an ELB if deploying this chart in AWS, so they'll automatically get used.
-# Be sure to add the appropriate domain name, cert ARN, and ssl-negotiation-policy (a default is used here).
-service:
-  annotations:
-  type: ClusterIP
-
 tty:
   enabled: true
 
