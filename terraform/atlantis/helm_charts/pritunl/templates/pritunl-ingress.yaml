@@ -8,7 +8,7 @@ metadata:
   name: {{ template "pritunl.fullname" . }}
 spec:
   rules:
-  - host: pritunl.{{ .Values.image.domainName|quote }}
+  - host: pritunl.{{ .Values.image.domainName }}
     http:
       paths: 
       - backend:
@@ -20,5 +20,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - pritunl.{{ .Values.image.domainName|quote }}
-    secretName: {{ .Values.image.secretName|quote }}
+    - pritunl.{{ .Values.image.domainName }}
+    secretName: {{ .Values.image.secretName }}
