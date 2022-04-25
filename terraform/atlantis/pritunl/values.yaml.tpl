@@ -1,6 +1,3 @@
-service:
-  annotations: {}
-
 image:
   registry: ${DOCKER_REGISTRY}  
   repository: autotune/pritunl-k8s-tf-do/autotune/pritunl-k8s-tf-do
