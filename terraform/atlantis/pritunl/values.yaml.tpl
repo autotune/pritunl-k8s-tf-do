@@ -1,4 +1,5 @@
-annotations: {}
+service:
+  annotations: {}
 
 image:
   registry: ${DOCKER_REGISTRY}  
