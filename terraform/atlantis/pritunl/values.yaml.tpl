@@ -1,4 +1,4 @@
-services:
+service:
   annotations: {}
   Type: ClusterIP 
 
