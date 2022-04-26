@@ -62,6 +62,7 @@ resource "tls_cert_request" "request" {
     "atlantis.default.svc.cluster.local",
     "localhost",
     "pritunl.${var.domain_name}",
+    "vpn.${var.domain_name}",
   ]
 
   ip_addresses = [
