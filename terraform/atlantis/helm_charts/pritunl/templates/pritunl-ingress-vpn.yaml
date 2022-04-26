@@ -13,7 +13,7 @@ spec:
       paths: 
       - backend:
           service:
-            name: {{ template "pritunl.name" . }}-vpn
+            name: {{ template "pritunl.name" . }}
             port:
               number: {{ .Values.ports.vpn }}
         path: /
