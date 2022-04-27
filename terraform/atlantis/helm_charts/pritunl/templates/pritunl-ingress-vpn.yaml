@@ -21,4 +21,4 @@ spec:
   tls:
   - hosts:
     - vpn.{{ .Values.image.domainName }}
-    secretName: {{ .Values.image.secretName }}
+    secretName: {{ .Values.image.secretVPNName }}

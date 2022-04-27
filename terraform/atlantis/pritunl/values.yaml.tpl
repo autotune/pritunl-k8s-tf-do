@@ -10,6 +10,7 @@ image:
   pullSecret: ${DOMAIN_NAME}-docker-login
   domainName: ${DOMAIN_NAME_VERBOSE}
   secretName: ${DOMAIN_NAME}-pritunl-tls
+  secretVPNName: ${DOMAIN_NAME}-vpn-tls
 
 # This should match whatever the 'mongodb' service is called in the cluster.
 # DNS should be able to resolve the service by this name for Pritunl to function.
