@@ -72,7 +72,7 @@ resource "tls_cert_request" "request-vpn" {
 }
 
 resource "tls_locally_signed_cert" "cert-vpn" {
-  cert_request_pem = tls_cert_request-vpn.request.cert_request_pem
+  cert_request_pem = tls_cert_request.request-vpn.cert_request_pem
 
   ca_key_algorithm   = tls_private_key.ca-vpn.algorithm
   ca_private_key_pem = tls_private_key.ca-vpn.private_key_pem
