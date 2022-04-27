@@ -6,8 +6,8 @@ resource "kubernetes_secret" "tls-vpn" {
   }
 
   data = {
-    "tls.crt" = tls_locally_signed_cert-vpn.cert.cert_pem
-    "tls.key" = tls_private_key-vpn.key.private_key_pem
+    "tls.crt" = tls_locally_signed_cert.cert-vpn.cert_pem
+    "tls.key" = tls_private_key.key-vpn.private_key_pem
   }
 }
 
@@ -74,9 +74,9 @@ resource "tls_cert_request" "request-vpn" {
 resource "tls_locally_signed_cert" "cert-vpn" {
   cert_request_pem = tls_cert_request-vpn.request.cert_request_pem
 
-  ca_key_algorithm   = tls_private_key-vpn.ca.algorithm
-  ca_private_key_pem = tls_private_key-vpn.ca.private_key_pem
-  ca_cert_pem        = tls_self_signed_cert-vpn.ca.cert_pem
+  ca_key_algorithm   = tls_private_key.ca-vpn.algorithm
+  ca_private_key_pem = tls_private_key.ca-vpn.private_key_pem
+  ca_cert_pem        = tls_self_signed_cert.ca-vpn.cert_pem
 
   validity_period_hours = 8760
 
@@ -89,6 +89,6 @@ resource "tls_locally_signed_cert" "cert-vpn" {
   ]
 
   provisioner "local-exec" {
-    command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca.cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
+    command = "echo '${self.cert_pem}' > ../tls/tls.cert && echo '${tls_self_signed_cert.ca-vpn.cert_pem}' >> ../tls/tls.cert && chmod 0600 ../tls/tls.cert"
   }
 }
