@@ -22,7 +22,7 @@ spec:
     targetPort: backend-http
   - name: vpn
     port: {{ .Values.ports.vpn }}
-    protocol: TCP
+    protocol: UDP 
     targetPort: backend-vpn
   - name: webui
     port: {{ .Values.ports.webui }}
