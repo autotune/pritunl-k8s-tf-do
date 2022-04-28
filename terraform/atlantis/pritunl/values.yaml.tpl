@@ -1,6 +1,6 @@
 service:
   annotations: {}
-  Type: LoadBalancer 
+  type: LoadBalancer 
 
 image:
   registry: ${DOCKER_REGISTRY}  
