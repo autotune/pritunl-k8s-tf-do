@@ -1,6 +1,6 @@
 service:
   annotations: {}
-  Type: ClusterIP 
+  type: LoadBalancer 
 
 image:
   registry: ${DOCKER_REGISTRY}  
@@ -28,7 +28,7 @@ privileged:
 
 # This will adjust the replicas that are deployed as a part of the Pritunl deployment.
 # This is '3' by default. Your Pritunl cluster number will be affected by this.
-replicaCount: 3
+replicaCount: 1 
 
 tty:
   enabled: true
