@@ -1,10 +1,16 @@
+service:
+  annotations: {}
+  Type: ClusterIP 
+
 image:
   registry: ${DOCKER_REGISTRY}  
   repository: autotune/pritunl-k8s-tf-do/autotune/pritunl-k8s-tf-do
   tag: ${DOCKER_TAG} 
   pullPolicy: Always
-  pullSecret: "${DOMAIN_NAME}-docker-login"
-  domain_name: "${DOMAIN_NAME}"
+  pullSecret: ${DOMAIN_NAME}-docker-login
+  domainName: ${DOMAIN_NAME_VERBOSE}
+  secretName: ${DOMAIN_NAME}-pritunl-tls
+  secretVPNName: ${DOMAIN_NAME}-vpn-tls
 
 # This should match whatever the 'mongodb' service is called in the cluster.
 # DNS should be able to resolve the service by this name for Pritunl to function.
@@ -23,12 +29,6 @@ privileged:
 # This will adjust the replicas that are deployed as a part of the Pritunl deployment.
 # This is '3' by default. Your Pritunl cluster number will be affected by this.
 replicaCount: 3
-
-# If 'type' here is 'LoadBalancer', these annotations are necessary to properly use an ELB if deploying this chart in AWS, so they'll automatically get used.
-# Be sure to add the appropriate domain name, cert ARN, and ssl-negotiation-policy (a default is used here).
-service:
-  annotations:
-  type: ClusterIP
 
 tty:
   enabled: true
