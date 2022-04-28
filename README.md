@@ -4,7 +4,7 @@
 
 Starts out using GitHub Actions to launch Atlantis via Terraform 
 
-Uses Terraform to launch a kubernetes cluster in Digital Ocean with zerossl.com (a LetsEncrypt alternative with many pros including paid support, paid 1 year certs, free 90 day certs, and visibility into created certs) 
+Uses Terraform to launch a kubernetes cluster in Digital Ocean with zerossl.com (a LetsEncrypt alternative with many pros including paid support, paid 1 year certs, free 90 day certs, and visibility and observability into created certs) 
 
 Creates a deployment with ingress for atlantis at `https://terraform.example.com`
 
@@ -48,7 +48,11 @@ Uses official mongodb helm chart. User management bit of a plaintext nightmare w
 
 ## PRITUNL
 
-Uses https://github.com/articulate/helmcharts/tree/master/stable/pritunl as base. I manually created ingress helm template and made several modifications to get working with a generic, non-AWS, deployment. 
+Uses https://github.com/articulate/helmcharts/tree/master/stable/pritunl as base. I manually created ingress helm template and made several modifications to get working with a generic, non-AWS, deployment. You will have to run a `kubectl get svc -npritunl` command to get the load balancer IP for the vpn, then simply add a new server within the pritunl GUI listening on port 1194 TCP, at which point you can connect to the load balancer IP over 1194 using pritunl client. 
+
+## DOCKER IMAGE
+
+A new docker image is build using kaniko on every run of GitHub Actions. You will have to take the latest tag and substitute within pritunl-k8s-tf-do/terraform/atlantis/data.tf `DOCKER_TAG` var. 
 
 ## SECRETS
 
@@ -74,12 +78,12 @@ OAUTH\_CLIENT\_ID
 
 OAUTH\_CLIENT\_SECRET
 
-OAUTH\_COOKIE\_SECRET
+OAUTH\_COOKIE\_SECRET => random base64 value
 
 PACKAGE\_REGISTRY\_PAT
 
-SSLCOM\_HMAC\_KEY
+SSLCOM\_HMAC\_KEY => use zerossl hmac key here
 
-SSLCOM\_KEYID
+SSLCOM\_KEYID => use zerossl keyid here
 
-SSLCOM\_PRIVATE\_KEYID
+SSLCOM\_PRIVATE\_KEYID => may not be needed 
