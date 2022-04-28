@@ -23,6 +23,6 @@ spec:
   - name: vpn
     port: {{ .Values.ports.vpn }}
     targetPort: backend-vpn # {{ .Values.ports.vpn }}
-  - name: webui
-    port: {{ .Values.ports.webui }}
-    targetPort: backend-webui # {{ .Values.ports.webui }}
+  # - name: webui
+  #   port: {{ .Values.ports.webui }}
+  #   targetPort: backend-webui # {{ .Values.ports.webui }}
