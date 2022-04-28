@@ -19,10 +19,10 @@ spec:
   ports:
   - name: http
     port: {{ .Values.ports.http }}
-    targetPort: {{ .Values.ports.http }}
+    targetPort: backend-http # {{ .Values.ports.http }}
   - name: vpn
     port: {{ .Values.ports.vpn }}
-    targetPort: {{ .Values.ports.vpn }}
+    targetPort: backend-vpn # {{ .Values.ports.vpn }}
   - name: webui
     port: {{ .Values.ports.webui }}
-    targetPort: {{ .Values.ports.webui }}
+    targetPort: backend-webui # {{ .Values.ports.webui }}
