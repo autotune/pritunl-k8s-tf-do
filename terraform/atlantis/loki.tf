@@ -10,7 +10,7 @@ resource "helm_release" "loki" {
   namespace  = "loki" 
   repository = "https://grafana.github.io/helm-charts"
   chart      = "loki"
-  version    = "2.12.0"
+  version    = "2.12.2"
 
   values = [
     sensitive("${file("loki.yaml")}")
