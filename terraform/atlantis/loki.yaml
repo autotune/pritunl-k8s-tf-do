@@ -1,6 +1,6 @@
 image:
   repository: grafana/loki
-  tag: 2.0.0
+  tag: 2.12.2
   pullPolicy: IfNotPresent
 
 # ingress:
