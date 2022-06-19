@@ -11,15 +11,8 @@ resource "helm_release" "loki" {
   repository = "https://grafana.github.io/helm-charts"
   chart      = "loki"
   version    = "2.12.2"
-
-  /*
-  values = [
-    sensitive("${file("loki.yaml")}")
-  ]
-  */
 }
 
-/*
 resource "kubernetes_ingress" "loki_cluster_ingress" {
   depends_on = [
     helm_release.nginx_ingress_chart, helm_release.loki
@@ -27,7 +20,6 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
   for_each = toset(var.domain_name)
   metadata {
     name = "${each.key}-loki-ingress"
-    namespace  = "loki"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
@@ -35,4 +27,29 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
         "nginx.ingress.kubernetes.io/auth-url" = "https://$host/oauth2/auth"
         "nginx.ingress.kubernetes.io/auth-signin" = "https://$host/oauth2/start?rd=https://$host$request_uri$is_args$args"
     }
-*/
+  }
+  spec {
+    dynamic "rule" {
+      for_each = toset(var.domain_name)
+      content {
+        host = "loki.${rule.value}"
+        http {
+          path {
+            backend {
+              service_name = "loki"
+              service_port = 3100
+            }
+            path = "/"
+          }
+        }
+      }
+    }
+    dynamic "tls" {
+      for_each = toset(var.domain_name)
+      content {
+        secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
+        hosts = ["terraform.${tls.value}"]
+      }
+    }
+  }
+}
