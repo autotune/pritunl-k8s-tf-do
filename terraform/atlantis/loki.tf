@@ -26,6 +26,7 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
         "cert-manager.io/cluster-issuer" = "zerossl"
         "nginx.ingress.kubernetes.io/auth-url" = "https://$host/oauth2/auth"
         "nginx.ingress.kubernetes.io/auth-signin" = "https://$host/oauth2/start?rd=https://$host$request_uri$is_args$args"
+        "nginx.ingress.kubernetes.io/whitelist-source-range" = join(",", concat(local.extra_ips))
     }
   }
   spec {
