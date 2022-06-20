@@ -17,7 +17,7 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
   depends_on = [
     helm_release.loki
   ]
-  for_each = toset(var.domain_name)
+  for_each = toset(var.loki_domain)
   metadata {
     name = "${each.key}-loki-ingress"
     annotations = {
@@ -30,7 +30,7 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
   }
   spec {
     dynamic "rule" {
-      for_each = toset(var.domain_name)
+      for_each = toset(var.loki_domain)
       content {
         host = "loki.${rule.value}"
         http {
@@ -45,10 +45,10 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
       }
     }
     dynamic "tls" {
-      for_each = toset(var.domain_name)
+      for_each = toset(var.loki_domain)
       content {
-        secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
-        hosts = ["terraform.${tls.value}"]
+        secret_name = "${replace(tls.value, ".", "-")}-loki-tls"
+        hosts = ["loki.${tls.value}"]
       }
     }
   }

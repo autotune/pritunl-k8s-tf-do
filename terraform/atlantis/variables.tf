@@ -52,7 +52,11 @@ variable "do_k8s_name" {
 
 variable "domain_name" {
   description = "domain name"
-  type = list(string) 
+  default = "wayofthesys.com"  
+}
+
+variable "loki_domain" {
+  description = "domain name"
   default = ["wayofthesys.com"]  
 }
 
