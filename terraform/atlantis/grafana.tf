@@ -3,6 +3,7 @@ resource "helm_release" "grafana" {
   repository = "https://grafana.github.io/helm-charts"
   chart      = "grafana"
   version    = "6.30.2"
+  values = [file("grafana.yaml")]
 }
 
 resource "kubernetes_ingress" "grafana_cluster_ingress" {
