@@ -15,7 +15,7 @@ resource "helm_release" "loki" {
 
 resource "kubernetes_ingress" "loki_cluster_ingress" {
   depends_on = [
-    helm_release.nginx_ingress_chart, helm_release.loki
+    helm_release.loki
   ]
   for_each = toset(var.domain_name)
   metadata {
