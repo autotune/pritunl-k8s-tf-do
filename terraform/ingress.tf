@@ -105,6 +105,45 @@ resource "kubernetes_ingress" "atlantis_cluster_ingress" {
   }
 }
 
+resource "kubernetes_ingress" "oauth2_cluster_ingress_default" {
+  depends_on = [
+    helm_release.nginx_ingress_chart
+  ]
+  for_each = toset(var.domain_name)
+  metadata {
+    name = "${each.key}-oauth2-ingress"
+    annotations = {
+        "kubernetes.io/ingress.class" = "nginx"
+        "ingress.kubernetes.io/rewrite-target" = "/"
+        "cert-manager.io/cluster-issuer" = "zerossl"
+    }
+  }
+  spec {
+    dynamic "rule" {
+      for_each = toset(var.domain_name)
+      content {
+        host = "${rule.value}"
+        http {
+          path {
+            backend {
+              service_name = "${replace(rule.value, ".", "-")}-oauth2-proxy"
+              service_port = 80 
+            }
+            path = "/oauth2"
+          }
+        }
+      }
+    }
+    dynamic "tls" {
+      for_each = toset(var.domain_name)
+      content {
+        secret_name = "${replace(tls.value, ".", "-")}-atlantis-tls"
+        hosts = ["${tls.value}"]
+      }
+    }
+  }
+}
+
 resource "kubernetes_ingress" "oauth2_cluster_ingress" {
   depends_on = [
     helm_release.nginx_ingress_chart

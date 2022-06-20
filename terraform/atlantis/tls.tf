@@ -74,6 +74,7 @@ resource "tls_cert_request" "request" {
     "localhost",
     "pritunl.${var.domain_name}",
     "vpn.${var.domain_name}",
+    "loki.${var.domain_name}",
   ]
 
   ip_addresses = [
