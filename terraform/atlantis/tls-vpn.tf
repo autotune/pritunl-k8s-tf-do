@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "tls-vpn" {
   depends_on = [kubernetes_namespace.pritunl]
   metadata {
-    name      = "${replace(var.domain_name, ".", "-")}-vpn-tls"
+    name      = "${replace(var.domain_name[0], ".", "-")}-vpn-tls"
     namespace = "pritunl"
   }
 
@@ -57,7 +57,7 @@ resource "tls_cert_request" "request-vpn" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "vpn.${var.domain_name}",
+    "vpn.${var.domain_name[0]}",
   ]
 
   ip_addresses = [
@@ -66,7 +66,7 @@ resource "tls_cert_request" "request-vpn" {
   ]
 
   subject {
-    common_name  = "vpn.${var.domain_name}"
+    common_name  = "vpn.${var.domain_name[0]}"
     organization = "Atlantis"
   }
 }

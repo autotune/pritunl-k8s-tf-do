@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "tls" {
   depends_on = [kubernetes_namespace.pritunl]
   metadata {
-    name      = "${replace(var.domain_name, ".", "-")}-pritunl-tls"
+    name      = "${replace(var.domain_name[0], ".", "-")}-pritunl-tls"
     namespace = "pritunl"
   }
 
@@ -13,7 +13,7 @@ resource "kubernetes_secret" "tls" {
 
 resource "kubernetes_secret" "loki-tls" {
   metadata {
-    name      = "${replace(var.domain_name, ".", "-")}-loki-tls"
+    name      = "${replace(var.domain_name[0], ".", "-")}-loki-tls"
   }
 
   data = {
@@ -72,8 +72,8 @@ resource "tls_cert_request" "request" {
     "atlantis.local",
     "atlantis.default.svc.cluster.local",
     "localhost",
-    "pritunl.${var.domain_name}",
-    "vpn.${var.domain_name}",
+    "pritunl.${var.domain_name[0]}",
+    "vpn.${var.domain_name[0]}",
   ]
 
   ip_addresses = [
@@ -82,7 +82,7 @@ resource "tls_cert_request" "request" {
   ]
 
   subject {
-    common_name  = "pritunl.${var.domain_name}"
+    common_name  = "pritunl.${var.domain_name[0]}"
     organization = "Atlantis"
   }
 }

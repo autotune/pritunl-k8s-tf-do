@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "docker_login_secret" {
   metadata {
-    name      = "${replace(var.domain_name, ".", "-")}-docker-login"
+    name      = "${replace(var.domain_name[0], ".", "-")}-docker-login"
     namespace = "pritunl"
   }
 
