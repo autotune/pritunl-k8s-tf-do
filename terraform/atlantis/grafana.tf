@@ -1,9 +1,3 @@
-resource "kubernetes_namespace" "loki" {
-  metadata {
-    name = "loki"
-  }
-}
-
 resource "helm_release" "grafana" {
   name       = "grafana"
   repository = "https://grafana.github.io/helm-charts"
