@@ -50,11 +50,13 @@ variable "do_k8s_name" {
   default     = "k8s-do"
 }
 
+/*
 variable "domain_name" {
   description = "domain name"
   type = list
   default = ["wayofthesys.com"]  
 }
+*/
 
 variable "mongodb_version" {
   type = string
