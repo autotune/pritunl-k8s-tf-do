@@ -10,6 +10,18 @@ data "template_file" "oauth2_proxy" {
 	}
 }
 
+resource "helm_release" "oauth2_proxy_default" {
+  for_each   = toset(var.domain_name)
+  name       = "${replace(each.key, ".", "-")}-oauth2-proxy"
+
+  repository = "https://oauth2-proxy.github.io/manifests"
+  chart      = "oauth2-proxy"
+
+  values = [
+  	data.template_file.oauth2_proxy.rendered
+  ]
+}
+
 resource "helm_release" "oauth2_proxy" {
   for_each   = toset(var.domain_name)
   name       = "${replace(each.key, ".", "-")}-oauth2-proxy"
