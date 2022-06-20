@@ -32,14 +32,14 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
     dynamic "rule" {
       for_each = toset(var.loki_domain)
       content {
-        host = "loki.${rule.value}"
+        host = "${rule.value}"
         http {
           path {
             backend {
               service_name = "loki"
               service_port = 3100
             }
-            path = "/"
+            path = "/loki"
           }
         }
       }
@@ -48,7 +48,7 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
       for_each = toset(var.loki_domain)
       content {
         secret_name = "${replace(tls.value, ".", "-")}-loki-tls"
-        hosts = ["loki.${tls.value}"]
+        hosts = ["${tls.value}"]
       }
     }
   }
