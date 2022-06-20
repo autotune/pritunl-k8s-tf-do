@@ -52,7 +52,6 @@ variable "do_k8s_name" {
 
 variable "domain_name" {
   description = "domain name"
-  type = list
   default = ["wayofthesys.com"]  
 }
 
