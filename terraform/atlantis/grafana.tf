@@ -1,32 +1,24 @@
-resource "kubernetes_namespace" "loki" {
-  metadata {
-    name = "loki"
-  }
-}
-
-resource "helm_release" "loki" {
-  depends_on = [kubernetes_namespace.loki]
-  name       = "loki"
-  # namespace  = "loki" 
+resource "helm_release" "grafana" {
+  name       = "grafana"
   repository = "https://grafana.github.io/helm-charts"
-  chart      = "loki"
-  version    = "2.12.2"
+  chart      = "grafana"
+  version    = "6.30.2"
+  values = [file("grafana.yaml")]
 }
 
-resource "kubernetes_ingress" "loki_cluster_ingress" {
+resource "kubernetes_ingress" "grafana_cluster_ingress" {
   depends_on = [
     helm_release.loki
   ]
   for_each = toset(var.loki_domain)
   metadata {
-    name = "${each.key}-loki-ingress"
+    name = "${each.key}-grafana-ingress"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
         "cert-manager.io/cluster-issuer" = "zerossl"
         "nginx.ingress.kubernetes.io/auth-url" = "https://$host/oauth2/auth"
         "nginx.ingress.kubernetes.io/auth-signin" = "https://$host/oauth2/start?rd=https://$host$request_uri$is_args$args"
-        "nginx.ingress.kubernetes.io/whitelist-source-range" = join(",", concat(local.extra_ips))
     }
   }
   spec {
@@ -37,10 +29,10 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
         http {
           path {
             backend {
-              service_name = "loki"
-              service_port = 3100
+              service_name = "grafana"
+              service_port = 3000
             }
-            path = "/loki"
+            path = "/grafana"
           }
         }
       }
@@ -48,7 +40,7 @@ resource "kubernetes_ingress" "loki_cluster_ingress" {
     dynamic "tls" {
       for_each = toset(var.loki_domain)
       content {
-        secret_name = "${replace(tls.value, ".", "-")}-loki-tls"
+        secret_name = "${replace(tls.value, ".", "-")}-grafana-tls"
         hosts = ["${tls.value}"]
       }
     }

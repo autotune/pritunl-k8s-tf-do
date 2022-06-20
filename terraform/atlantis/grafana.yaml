@@ -1,0 +1,9 @@
+grafana.ini:
+  server:
+    domain: wayofthesys.com
+    root_url: 'https://%(domain)s/grafana'
+    # also tried: 'http://%(domain)s/grafana/'
+    serve_from_sub_path: true
+    enforce_domain: false
+    enable_gzip: true
+    router_logging: true
