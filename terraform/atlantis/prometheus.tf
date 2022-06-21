@@ -4,7 +4,7 @@ resource "helm_release" "prometheus" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
   version    = "36.0.3"
-
+  values     = ["${file("grafana.yaml")}"]
   /*
   set {
     name  = "server.baseURL"
