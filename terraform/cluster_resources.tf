@@ -159,6 +159,11 @@ resource "kubernetes_deployment" "atlantis_deployment" {
             value = var.package_registry_pat
            }
 
+           env {
+            name  = "TF_VAR_grafana_api_key"
+            value = var.grafana_api_key
+           }
+
           resources {
             limits = {
               memory = "1024M"

@@ -146,8 +146,6 @@ variable "mongodb_root_password" {
   type = string
 }
 
-/*
-variable "foo" {
-  default = "bar"
+variable "grafana_api_key" {
+  type = string
 }
-*/

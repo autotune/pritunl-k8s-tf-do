@@ -1,10 +1,30 @@
-resource "kubernetes_ingress" "grafana_cluster_ingress" {
+resource "helm_release" "prometheus" {
+  depends_on = [kubernetes_namespace.loki]
+  name       = "prom-operator"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "kube-prometheus-stack"
+  version    = "36.0.3"
+  values     = ["${file("grafana.yaml")}"]
+  /*
+  set {
+    name  = "server.baseURL"
+    value = "wayofthesys.com/prometheus"
+  }
+
+  set {
+    name  = "server.prefixURL"
+    value = "/"
+  } */
+}
+
+/*
+resource "kubernetes_ingress" "prometheus_cluster_ingress" {
   depends_on = [
-    helm_release.loki
+    helm_release.prometheus
   ]
   for_each = toset(var.loki_domain)
   metadata {
-    name = "${each.key}-grafana-ingress"
+    name = "${each.key}-prometheus-ingress"
     annotations = {
         "kubernetes.io/ingress.class" = "nginx"
         "ingress.kubernetes.io/rewrite-target" = "/"
@@ -21,10 +41,10 @@ resource "kubernetes_ingress" "grafana_cluster_ingress" {
         http {
           path {
             backend {
-              service_name = "prom-operator-grafana"
-              service_port = 3000
+              service_name = "prometheus-server"
+              service_port = 80
             }
-            path = "/grafana"
+            path = "/prometheus"
           }
         }
       }
@@ -32,9 +52,9 @@ resource "kubernetes_ingress" "grafana_cluster_ingress" {
     dynamic "tls" {
       for_each = toset(var.loki_domain)
       content {
-        secret_name = "${replace(tls.value, ".", "-")}-grafana-tls"
+        secret_name = "${replace(tls.value, ".", "-")}-loki-tls"
         hosts = ["${tls.value}"]
       }
     }
   }
-}
+}*/
