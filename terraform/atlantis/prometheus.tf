@@ -7,7 +7,7 @@ resource "helm_release" "prometheus" {
 
   set {
     name  = "server.baseURL"
-    value = "/prometheus"
+    value = "wayofthesys.com/prometheus"
   }
 }
 
