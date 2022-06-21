@@ -1,9 +1,14 @@
-grafana.ini:
-  server:
-    domain: wayofthesys.com
-    root_url: 'https://%(domain)s/grafana'
-    # also tried: 'http://%(domain)s/grafana/'
-    serve_from_sub_path: true
-    enforce_domain: false
-    enable_gzip: true
-    router_logging: true
+grafana:
+  enabled: true
+  namespaceOverride: ""
+  # set pspUseAppArmor to false to fix Grafana pod Init errors
+  rbac:
+    pspUseAppArmor: false
+  grafana.ini:
+    server:
+      domain: wayofthesys.com
+      root_url: 'https://%(domain)s/grafana'
+      serve_from_sub_path: true
+      enforce_domain: false
+      enable_gzip: true
+      router_logging: true
