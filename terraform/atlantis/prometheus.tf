@@ -4,6 +4,11 @@ resource "helm_release" "prometheus" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "prometheus"
   version    = "15.10.1"
+
+  set {
+    name  = "server.baseURL"
+    value = "${var.loki_domain[0]}/prometheus"
+  }
 }
 
 
