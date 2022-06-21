@@ -77,3 +77,6 @@ variable "mongodb_root_password" {
   type = string 
 }
 
+variable "grafana_api_key" {
+  type = string 
+}
