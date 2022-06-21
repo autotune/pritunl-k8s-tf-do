@@ -14,8 +14,8 @@ resource "helm_release" "prometheus" {
   set {
     name  = "server.prefixURL"
     value = "/"
-  }
-}*/
+  } */
+}
 
 /*
 resource "kubernetes_ingress" "prometheus_cluster_ingress" {
