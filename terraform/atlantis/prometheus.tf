@@ -7,7 +7,7 @@ resource "helm_release" "prometheus" {
 
   set {
     name  = "server.baseURL"
-    value = "${var.loki_domain[0]}/prometheus"
+    value = "/prometheus"
   }
 }
 
