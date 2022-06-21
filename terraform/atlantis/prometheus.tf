@@ -1,10 +1,11 @@
 resource "helm_release" "prometheus" {
   depends_on = [kubernetes_namespace.loki]
-  name       = "prometheus"
+  name       = "prom-operator"
   repository = "https://prometheus-community.github.io/helm-charts"
-  chart      = "prometheus"
-  version    = "15.10.1"
+  chart      = "kube-prometheus-stack"
+  version    = "36.0.3"
 
+  /*
   set {
     name  = "server.baseURL"
     value = "wayofthesys.com/prometheus"
@@ -14,9 +15,9 @@ resource "helm_release" "prometheus" {
     name  = "server.prefixURL"
     value = "/"
   }
-}
+}*/
 
-
+/*
 resource "kubernetes_ingress" "prometheus_cluster_ingress" {
   depends_on = [
     helm_release.prometheus
@@ -56,4 +57,4 @@ resource "kubernetes_ingress" "prometheus_cluster_ingress" {
       }
     }
   }
-}
+}*/
