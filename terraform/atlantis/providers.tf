@@ -17,6 +17,6 @@ provider "digitalocean" {
 }
 
 provider "grafana" {
-  url  = "http://prom-operator-grafana/grafana"
+  url  = "http://prom-operator-grafana.default.svc.cluster.local/grafana"
   auth = var.grafana_api_key
 }
