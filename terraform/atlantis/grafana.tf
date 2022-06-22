@@ -1,3 +1,10 @@
+resource "grafana_data_source" "influxdb" {
+  depends_on    = [helm_release.loki]
+  type          = "loki"
+  name          = "loki"
+  url           = "http://loki:3100/"
+}
+
 resource "kubernetes_ingress" "grafana_cluster_ingress" {
   depends_on = [
     helm_release.loki
