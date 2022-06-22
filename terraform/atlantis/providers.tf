@@ -4,6 +4,10 @@ terraform {
       source = "digitalocean/digitalocean"
       version = "2.17.1"
     }
+    grafana = {
+      source = "grafana/grafana"
+      version = ">=1.24.0"
+    }
   }
 }
 
@@ -12,7 +16,7 @@ provider "digitalocean" {
   version = ">=1.5.0"
 }
 
-provider "grafana/grafana" {
+provider "grafana" {
   url  = "${var.loki_domain[0]}/grafana"
   auth = var.grafana_api_key
 }
