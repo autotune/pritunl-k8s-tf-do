@@ -17,6 +17,6 @@ provider "digitalocean" {
 }
 
 provider "grafana" {
-  url  = "${var.loki_domain[0]}/grafana"
+  url  = "https://${var.loki_domain[0]}/grafana"
   auth = var.grafana_api_key
 }
