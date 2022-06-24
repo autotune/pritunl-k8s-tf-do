@@ -6,7 +6,7 @@ resource "grafana_data_source" "loki" {
 }
 
 resource "grafana_dashboard" "loki-metrics" {
-  dashboard_id = 12019
+  config_json = file("loki_dashboard.json")
 }
 
 resource "kubernetes_ingress" "grafana_cluster_ingress" {
