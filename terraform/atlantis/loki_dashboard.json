@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_LOKI",
+      "name": "loki",
       "label": "Loki",
       "description": "",
       "type": "datasource",
@@ -9,7 +9,7 @@
       "pluginName": "Loki"
     },
     {
-      "name": "DS_PROMETHEUS",
+      "name": "prometheus",
       "label": "Prometheus",
       "description": "",
       "type": "datasource",
