@@ -1,0 +1,14 @@
+config:
+  # -- The log level of the Promtail server
+  # Must be reference in `config.file` to configure `server.log_level`
+  # See default config in `values.yaml`
+  logLevel: info
+  # -- The port of the Promtail server
+  # Must be reference in `config.file` to configure `server.http_listen_port`
+  # See default config in `values.yaml`
+  serverPort: 3101
+  # -- The config of clients of the Promtail server
+  # Must be reference in `config.file` to configure `clients`
+  # @default -- See `values.yaml`
+  clients:
+    - url: http://loki:3100/loki/api/v1/push

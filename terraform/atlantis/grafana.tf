@@ -1,3 +1,17 @@
+resource "grafana_data_source" "loki" {
+  depends_on    = [helm_release.loki]
+  type          = "loki"
+  name          = "loki"
+  url           = "http://loki:3100/"
+  json_data {
+    query_timeout = 300
+  }
+}
+
+resource "grafana_dashboard" "loki-metrics" {
+  config_json = file("loki_dashboard.json")
+}
+
 resource "kubernetes_ingress" "grafana_cluster_ingress" {
   depends_on = [
     helm_release.loki
