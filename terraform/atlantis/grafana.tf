@@ -9,7 +9,7 @@ resource "grafana_data_source" "loki" {
 }
 
 resource "grafana_dashboard" "loki-metrics" {
-  config_json = file("loki_dashboard.json")
+  config_json = file("loki_dashboard_v2.json")
 }
 
 resource "kubernetes_ingress" "grafana_cluster_ingress" {
