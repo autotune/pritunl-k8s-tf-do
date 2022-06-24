@@ -1,8 +1,12 @@
-resource "grafana_data_source" "influxdb" {
+resource "grafana_data_source" "loki" {
   depends_on    = [helm_release.loki]
   type          = "loki"
   name          = "loki"
   url           = "http://loki:3100/"
+}
+
+resource "grafana_dashboard" "loki-metrics" {
+  dashboard_id = 12019
 }
 
 resource "kubernetes_ingress" "grafana_cluster_ingress" {
