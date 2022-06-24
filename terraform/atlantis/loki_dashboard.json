@@ -81,7 +81,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -165,7 +165,7 @@
       }
     },
     {
-      "datasource": "${DS_LOKI}",
+      "datasource": "loki",
       "gridPos": {
         "h": 25,
         "w": 24,
@@ -217,7 +217,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "prometheus",
         "definition": "label_values(kube_pod_info, namespace)",
         "hide": 0,
         "includeAll": false,
@@ -240,7 +240,7 @@
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "prometheus",
         "definition": "label_values(container_network_receive_bytes_total{namespace=~\"$namespace\"},pod)",
         "hide": 0,
         "includeAll": true,

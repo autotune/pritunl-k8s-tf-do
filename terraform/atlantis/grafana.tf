@@ -3,6 +3,7 @@ resource "grafana_data_source" "loki" {
   type          = "loki"
   name          = "loki"
   url           = "http://loki:3100/"
+  query_timeout = 300
 }
 
 resource "grafana_dashboard" "loki-metrics" {
