@@ -20,7 +20,7 @@ resource "helm_release" "prometheus" {
 resource "helm_release" "promtail" {
   depends_on = [kubernetes_namespace.loki]
   name       = "promtail"
-  repository = "https://prometheus-community.github.io/helm-charts"
+  repository = "https://grafana.github.io/helm-charts"
   chart      = "promtail"
   version    = "5.1.0"
   set {
