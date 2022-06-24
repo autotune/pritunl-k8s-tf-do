@@ -23,6 +23,7 @@ resource "helm_release" "promtail" {
   repository = "https://grafana.github.io/helm-charts"
   chart      = "promtail"
   version    = "5.1.0"
+  values     = ["${file("promtail.yaml")}"]
   set {
     name  = "loki.serviceName"
     value = "loki"
